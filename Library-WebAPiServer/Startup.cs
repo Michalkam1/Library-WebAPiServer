@@ -10,6 +10,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using Database;
+using Microsoft.EntityFrameworkCore;
 
 namespace Library_WebAPiServer
 {
@@ -25,6 +27,14 @@ namespace Library_WebAPiServer
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddDbContext<DatabaseContext>(options =>
+                            //options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"),
+                            //    b => b.MigrationsAssembly("Database")));
+                            options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"),
+                  b => b.MigrationsAssembly("Database")));
+
+
+
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }
 
