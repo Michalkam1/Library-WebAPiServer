@@ -15,7 +15,7 @@ namespace TestConsole
             using (DatabaseContext databaseContext = new DatabaseContext(builder.Options))
             {
                 var authorName = databaseContext.Authors.First().FirstName;
-                var status = databaseContext.Statuses.First().;
+                var status = databaseContext.Statuses.First();
 
 
                 foreach (var item in databaseContext.ItemStatuses)
