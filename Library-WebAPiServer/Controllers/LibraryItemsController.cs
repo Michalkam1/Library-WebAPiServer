@@ -32,49 +32,37 @@ namespace Library_WebAPiServer.Controllers
             //var mapItemAuthor = Mapper.Map<AuthorDTO>(item);
             //var auth = Mapper.Map<Author, AuthorDTO>();
 
-            var libraryEntities = _dbContext.LibraryItems.Select(item => item);
+            //var libraryEntities = _dbContext.LibraryItems.Select(item => item);
 
-            //var libraryDtoEnts = 
-            return libraryEntities.Select(item => new LibraryItemDTO
+            ////var libraryDtoEnts = 
+            //return libraryEntities.Select(item => new LibraryItemDTO
+            //{
+            //    Id = item.Id,
+            //    //Author = Mapper.Map(LibraryItemDTO, LibraryItem), //item.Author. , //item.Author.LastName + " " + item.Author.FirstName
+            //    Cover = item.Cover,
+            //    //ItemType = item.ItemType, //LibraryItemType
+            //    IssueYear = item.IssueYear,
+            //    Title = item.Title
+            //}).ToList();
+
+            IQueryable<LibraryItemDTO> libItems = _dbContext.LibraryItem.Select(item => new LibraryItemDTO()//.Include(item => item.Author)
             {
+
                 Id = item.Id,
                 //Author = Mapper.Map(LibraryItemDTO, LibraryItem), //item.Author. , //item.Author.LastName + " " + item.Author.FirstName
                 Cover = item.Cover,
                 //ItemType = item.ItemType, //LibraryItemType
                 IssueYear = item.IssueYear,
                 Title = item.Title
-            }).ToList();
+            });
+            return libItems.ToList();
 
-            //IQueryable<LibraryItemDTO> libItems = _dbContext.LibraryItems.Select(item => new LibraryItemDTO()//.Include(item => item.Author)
-            //{
-
-            //    Id = item.Id,
-            //    Author = Mapper.Map(LibraryItemDTO, LibraryItem), //item.Author. , //item.Author.LastName + " " + item.Author.FirstName
-            //    Cover = item.Cover,
-            //    //ItemType = item.ItemType, //LibraryItemType
-            //    IssueYear = item.IssueYear,
-            //    Title = item.Title
-            //});
-
-
-
-            //.SingleOrDefaultAsync(item => item.Author.Id == Id);
-
-            //if (libItems.ToList().Count() > 0)
-            //{
-            //return libraryDtoEnts.ToList();
-            //    }
-            //    else
-            //    {
-            //        return null;
-            //    }
-            //}
         }
         //GET
         [HttpGet("{Id}")]
         public ActionResult<IEnumerable<LibraryItemDTO>> Get(int ItemId)
         {
-            IQueryable<LibraryItemDTO> libItems = _dbContext.LibraryItems.Where(item => item.Id == ItemId).Select(item => new LibraryItemDTO()
+            IQueryable<LibraryItemDTO> libItems = _dbContext.LibraryItem.Where(item => item.Id == ItemId).Select(item => new LibraryItemDTO()
             {
                 Id = item.Id,
                 Title = item.Title,
@@ -85,10 +73,10 @@ namespace Library_WebAPiServer.Controllers
         }
 
         [HttpPost]
-        public ActionResult<LibraryItemDTO> Post([FromBody] LibraryItemDTO libItemDTO)
+        public ActionResult<LibraryItemDTO> Post(LibraryItemDTO libItemDTO)
         {
             LibraryItemDTO libItem = libItemDTO;
-                _dbContext.LibraryItems.Add(new Database.Entities.LibraryItem()
+                _dbContext.LibraryItem.Add(new Database.Entities.LibraryItem()
             {
                 //Author = Mapper.Map<AuthorDTO>(libItemDTO),
                 Title = libItemDTO.Title,
