@@ -12,7 +12,7 @@ namespace Library_WebAPiServer.Controllers
     {
         // GET api/values
         [HttpGet]
-        public ActionResult<IEnumerable<string>> Get()
+        public ActionResult<IEnumerable<string>> GetAll()
         {
             return new string[] { "value1", "value2" };
         }
