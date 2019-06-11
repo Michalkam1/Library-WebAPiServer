@@ -30,10 +30,10 @@ namespace Database
 
         //}
 
-        public virtual DbSet<Author> Authors { get; set; }
-        public virtual DbSet<ItemStatus> ItemStatuses { get; set; }
+        public virtual DbSet<Author> Author { get; set; }
+        public virtual DbSet<ItemStatus> ItemStatus { get; set; }
         public virtual DbSet<LibraryItem>  LibraryItem { get; set; }
-        public virtual DbSet<Status> Statuses { get; set; }
+        public virtual DbSet<Status> Status { get; set; }
 
 
 

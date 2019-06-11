@@ -9,6 +9,8 @@ using Database.Entities;
 using Library_WebAPiServer.Models;
 using Microsoft.EntityFrameworkCore;
 using AutoMapper;
+using AutoMapper.QueryableExtensions;
+using AutoMapper.Configuration;
 
 namespace Library_WebAPiServer.Controllers
 {
@@ -18,44 +20,38 @@ namespace Library_WebAPiServer.Controllers
     public class LibraryItemsController : ControllerBase
     {
         private DatabaseContext _dbContext;
+        private readonly IMapper _mapper;
 
-        public LibraryItemsController(DatabaseContext dbContext)
+        public LibraryItemsController(DatabaseContext dbContext, IMapper mapper)
         {
             _dbContext = dbContext;
+            _mapper = mapper;
         }
 
         //GET all
         [HttpGet]
         public ActionResult<IEnumerable<LibraryItemDTO>> GetAll()
         {
-            //Mapper.CreateMap<LibraryItemDTO libItmDTO > ();
-            //var mapItemAuthor = Mapper.Map<AuthorDTO>(item);
-            //var auth = Mapper.Map<Author, AuthorDTO>();
+            var libraryItems = _dbContext.LibraryItem
+                .Select(li => li.Title )
+                //.Include(li => li.)
+                .ProjectTo<LibraryItemDTO>()
+                .ToList();
+            return libraryItems;
 
-            //var libraryEntities = _dbContext.LibraryItems.Select(item => item);
+            //IQueryable<LibraryItemDTO> libItems = _dbContext.LibraryItem
+            //    .Select(item => new LibraryItemDTO()
+            //    {
 
-            ////var libraryDtoEnts = 
-            //return libraryEntities.Select(item => new LibraryItemDTO
-            //{
-            //    Id = item.Id,
-            //    //Author = Mapper.Map(LibraryItemDTO, LibraryItem), //item.Author. , //item.Author.LastName + " " + item.Author.FirstName
-            //    Cover = item.Cover,
-            //    //ItemType = item.ItemType, //LibraryItemType
-            //    IssueYear = item.IssueYear,
-            //    Title = item.Title
-            //}).ToList();
+            //        Id = item.Id,
+            //        //Author = Mapper.Map(LibraryItemDTO, LibraryItem), //item.Author. , //item.Author.LastName + " " + item.Author.FirstName
+            //        Cover = item.Cover,
+            //        //ItemType = item.ItemType, //LibraryItemType
+            //        IssueYear = item.IssueYear,
+            //        Title = item.Title
+            //    });
+            //return libItems.ToList();
 
-            IQueryable<LibraryItemDTO> libItems = _dbContext.LibraryItem.Select(item => new LibraryItemDTO()//.Include(item => item.Author)
-            {
-
-                Id = item.Id,
-                //Author = Mapper.Map(LibraryItemDTO, LibraryItem), //item.Author. , //item.Author.LastName + " " + item.Author.FirstName
-                Cover = item.Cover,
-                //ItemType = item.ItemType, //LibraryItemType
-                IssueYear = item.IssueYear,
-                Title = item.Title
-            });
-            return libItems.ToList();
 
         }
         //GET
@@ -70,22 +66,48 @@ namespace Library_WebAPiServer.Controllers
                 Cover = item.Cover
             });
             return libItems.ToList();
+
         }
 
-        [HttpPost]
-        public ActionResult<LibraryItemDTO> Post(LibraryItemDTO libItemDTO)
-        {
-            LibraryItemDTO libItem = libItemDTO;
-                _dbContext.LibraryItem.Add(new Database.Entities.LibraryItem()
-            {
-                //Author = Mapper.Map<AuthorDTO>(libItemDTO),
-                Title = libItemDTO.Title,
-                Cover = libItemDTO.Cover,
-            });
+        //[HttpPost]
+        //public 
 
-            _dbContext.SaveChanges();
-            return libItem;
-        }
+        //[HttpPost]
+        //public ActionResult<LibraryItemDTO> Post(LibraryItemDTO libItemDTO)
+        //{
+        //    LibraryItemDTO libItem = libItemDTO;
+
+        //    var cfg = new MapperConfigurationExpression();
+        //    //cfg.CreateMap<Author, AuthorDTO>();
+        //    cfg.CreateMap<LibraryItem, LibraryItemDTO>();
+        //    //cfg.AddProfile<MyProfile>();
+        //    //libItem.InitAutoMapper(cfg);
+
+        //    //Mapper.Initialize(cfg);
+        //    // or
+        //    var mapperConfig = new MapperConfiguration(cfg);
+        //    IMapper mapper = new Mapper(mapperConfig);
+
+
+        //    //var dto = _dbContext.LibraryItem
+        //    //            //.Where(l => l.Id == libItemDTO)
+        //    //            .ProjectTo<LibraryItemDTO>(mapper)
+        //    //            .Select(libItem);
+        //    //            //.SingleOrDefault();
+
+
+        //    _dbContext.LibraryItem.ProjectTo<LibraryItemDTO>(libItem).Add(new LibraryItem()
+        //     {
+        //           //Author = (Author)Mapper.Map<AuthorDTO>(libItemDTO),
+
+        //           // Author = mapper.,
+        //         Title = libItemDTO.Title,
+        //         Cover = libItemDTO.Cover
+        //     });
+
+        //    _dbContext.SaveChanges();
+        //    return libItem;
+        //} 
     }
     /*
     public class SimpleMapper<TFrom, TTo>

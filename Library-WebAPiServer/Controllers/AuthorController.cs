@@ -21,14 +21,32 @@ namespace Library_WebAPiServer.Controllers
             _dbContext = dbContext;
         }
 
-        [HttpPost]
-        public void Post( AuthorDTO author)
-        {
-            _dbContext.Authors.Add(new Database.Entities.Author()
-            {
+        [HttpGet]
 
+        public ActionResult<IEnumerable<AuthorDTO>> GetAll()
+        {
+            IQueryable<AuthorDTO> authorDTO = _dbContext.Author.Select(item => new AuthorDTO()//.Include(item => item.Author)
+            {
+                FirstName = item.FirstName,
+                LastName = item.LastName
             });
+            return authorDTO.ToList();
+        }
+
+        [HttpPost]
+
+        public void Post(AuthorDTO authorDTO)
+        {
+            AuthorDTO auth = authorDTO;
+            _dbContext.Author.Add(new Database.Entities.Author()
+            {
+                Id = authorDTO.Id,
+                FirstName = authorDTO.FirstName,
+                LastName = authorDTO.LastName
+            });
+
             _dbContext.SaveChanges();
+
         }
 
     }

@@ -11,7 +11,10 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Database;
+using Database.Entities;
 using Microsoft.EntityFrameworkCore;
+using AutoMapper;
+using Library_WebAPiServer.Models;
 
 namespace Library_WebAPiServer
 {
@@ -20,6 +23,7 @@ namespace Library_WebAPiServer
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
+            //Mapper.Initialize(cfg => cfg.AddProfile<AutoMapperProfile>());
         }
 
         public IConfiguration Configuration { get; }
@@ -32,7 +36,7 @@ namespace Library_WebAPiServer
                             //    b => b.MigrationsAssembly("Database")));
                             options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"),
                   b => b.MigrationsAssembly("Database")));
-
+            services.AddAutoMapper();
 
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
