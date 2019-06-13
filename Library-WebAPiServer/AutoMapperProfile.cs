@@ -8,9 +8,9 @@ using Database.Entities;
 
 namespace AutoMapper.Mappings
 {
-    public class AutoMapperProfile : Profile
+    public class AutoMapperModelToResource : Profile
     {
-        public AutoMapperProfile()
+        public AutoMapperModelToResource()
         {
             CreateMap<Author, AuthorDTO>();
             CreateMap<LibraryItem, LibraryItemDTO>();

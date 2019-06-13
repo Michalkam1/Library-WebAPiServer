@@ -15,18 +15,19 @@ using Database.Entities;
 using Microsoft.EntityFrameworkCore;
 using AutoMapper;
 using Library_WebAPiServer.Models;
+using Library_WebAPiServer.Domain.Services;
 
 namespace Library_WebAPiServer
 {
     public class Startup
     {
+        public IConfiguration Configuration { get; }
+
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
-            //Mapper.Initialize(cfg => cfg.AddProfile<AutoMapperProfile>());
         }
 
-        public IConfiguration Configuration { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
@@ -36,10 +37,14 @@ namespace Library_WebAPiServer
                             //    b => b.MigrationsAssembly("Database")));
                             options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"),
                   b => b.MigrationsAssembly("Database")));
+
+
             services.AddAutoMapper();
 
+            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+            services.AddScoped<IAuthorsRepository, AuthorsRepository>();
+            services.AddScoped<IAuthorsServices, AuthorsServices>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

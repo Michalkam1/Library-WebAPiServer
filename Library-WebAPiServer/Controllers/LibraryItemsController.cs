@@ -11,6 +11,7 @@ using Microsoft.EntityFrameworkCore;
 using AutoMapper;
 using AutoMapper.QueryableExtensions;
 using AutoMapper.Configuration;
+using Library_WebAPiServer.Domain.Services;
 
 
 namespace Library_WebAPiServer.Controllers
@@ -21,6 +22,7 @@ namespace Library_WebAPiServer.Controllers
     public class LibraryItemsController : Controller //Base
     {
         private DatabaseContext _dbContext;
+        private readonly IAuthorsServices _authorsServices;
         private readonly IMapper _mapper;
 
 
@@ -32,32 +34,40 @@ namespace Library_WebAPiServer.Controllers
             _mapper = mapper;
         }
 
+        //[HttpGet]
+        //public async Task<IEnumerable<LibraryItemDTO>> GetAllAsync()
+        //{
+        //    var authors = await _authorsServices.ListAsync();
+        //    var authorsReusorces = _mapper.Map<IEnumerable<Author>, IEnumerable<AuthorDTO>>();
+        //    return authorsReusorces
+        //}
+
         //GET all
         [HttpGet]
         public ActionResult<IEnumerable<LibraryItemDTO>> GetAll()
         {
             var libraryItems = _dbContext.LibraryItem
-                .Select(li => li.Title )
+                .Select(li => li.Title)
                 //.Include(li => li.)
                 .ProjectTo<LibraryItemDTO>()
                 .ToList();
             return libraryItems;
-
-            //IQueryable<LibraryItemDTO> libItems = _dbContext.LibraryItem
-            //    .Select(item => new LibraryItemDTO()
-            //    {
-
-            //        Id = item.Id,
-            //        //Author = Mapper.Map(LibraryItemDTO, LibraryItem), //item.Author. , //item.Author.LastName + " " + item.Author.FirstName
-            //        Cover = item.Cover,
-            //        //ItemType = item.ItemType, //LibraryItemType
-            //        IssueYear = item.IssueYear,
-            //        Title = item.Title
-            //    });
-            //return libItems.ToList();
-
-
         }
+        //IQueryable<LibraryItemDTO> libItems = _dbContext.LibraryItem
+        //    .Select(item => new LibraryItemDTO()
+        //    {
+
+        //        Id = item.Id,
+        //        //Author = Mapper.Map(LibraryItemDTO, LibraryItem), //item.Author. , //item.Author.LastName + " " + item.Author.FirstName
+        //        Cover = item.Cover,
+        //        //ItemType = item.ItemType, //LibraryItemType
+        //        IssueYear = item.IssueYear,
+        //        Title = item.Title
+        //    });
+        //return libItems.ToList();
+
+
+
         //GET
         [HttpGet("{Id}")]
         public ActionResult<IEnumerable<LibraryItemDTO>> Get(int ItemId)

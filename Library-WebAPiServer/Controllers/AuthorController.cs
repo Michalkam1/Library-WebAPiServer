@@ -6,49 +6,63 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Library_WebAPiServer.Models;
 using Database;
+using Database.Entities;
 using Library_WebAPiServer.Domain.Services;
+using AutoMapper;
 
 namespace Library_WebAPiServer.Controllers
 {
     [Route("api/[controller]")]
     [Produces("application/json")]
     [ApiController]
-    public class AuthorController : ControllerBase
+    public class AuthorController : Controller //Base
     {
         DatabaseContext _dbContext;
         private readonly IAuthorsServices _authorsService;
+        private readonly IMapper _mapper;
 
-        public AuthorController(DatabaseContext dbContext, IAuthorsServices authorsServicecs)
+
+        public AuthorController(DatabaseContext dbContext, IAuthorsServices authorsServicecs, IMapper mapper)
         {
             _dbContext = dbContext;
             _authorsService = authorsServicecs;
+            _mapper = mapper;
         }
-
 
         [HttpGet]
-        public ActionResult<IEnumerable<AuthorDTO>> GetAll()
+        public async Task<IEnumerable<AuthorDTO>> GetAllAsync()
         {
-            IQueryable<AuthorDTO> authorDTO = _dbContext.Author.Select(item => new AuthorDTO()//.Include(item => item.Author)
-            {
-                FirstName = item.FirstName,
-                LastName = item.LastName
-            });
-            return authorDTO.ToList();
+            var author = await _authorsService.ListAsync();
+            var authorsReusorces = _mapper.Map<IEnumerable<Author>, IEnumerable<AuthorDTO>>(author);
+            return authorsReusorces;
         }
+
+
+        //[HttpGet]
+        //public ActionResult<IEnumerable<AuthorDTO>> GetAll()
+        //{
+        //    IQueryable<AuthorDTO> authorDTO = _dbContext.Author.Select(item => new AuthorDTO()//.Include(item => item.Author)
+        //    {
+        //        FirstName = item.FirstName,
+        //        LastName = item.LastName
+        //    });
+        //    return authorDTO.ToList();
+        //}
 
         [HttpPost]
 
         public void Post(AuthorDTO authorDTO)
         {
+
             AuthorDTO auth = authorDTO;
-            _dbContext.Author.Add(new Database.Entities.Author()
+            _dbContext.Author.AddAsync(new Author()
             {
                 Id = authorDTO.Id,
                 FirstName = authorDTO.FirstName,
                 LastName = authorDTO.LastName
             });
 
-            _dbContext.SaveChanges();
+            _dbContext.SaveChangesAsync();
 
         }
 
