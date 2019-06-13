@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Library_WebAPiServer.Models;
 using Database;
+using Library_WebAPiServer.Domain.Services;
 
 namespace Library_WebAPiServer.Controllers
 {
@@ -15,14 +16,16 @@ namespace Library_WebAPiServer.Controllers
     public class AuthorController : ControllerBase
     {
         DatabaseContext _dbContext;
+        private readonly IAuthorsServices _authorsService;
 
-        public AuthorController(DatabaseContext dbContext)
+        public AuthorController(DatabaseContext dbContext, IAuthorsServices authorsServicecs)
         {
             _dbContext = dbContext;
+            _authorsService = authorsServicecs;
         }
 
-        [HttpGet]
 
+        [HttpGet]
         public ActionResult<IEnumerable<AuthorDTO>> GetAll()
         {
             IQueryable<AuthorDTO> authorDTO = _dbContext.Author.Select(item => new AuthorDTO()//.Include(item => item.Author)

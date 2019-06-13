@@ -43,8 +43,10 @@ namespace Database
             base.OnModelCreating(builder);
 
             builder.Entity<LibraryItem>()
-                   .Property(e => e.ItemType)
-                   .HasConversion(
+                    .Property(e => e.ItemType)
+                    //.HasOne(e => e.Author)
+                    
+                    .HasConversion(
                         v => v.ToString(),
                         v => (LibraryItemType)Enum.Parse(typeof(LibraryItemType), v));
             // Customize the ASP.NET Identity model and override the defaults if needed.

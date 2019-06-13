@@ -12,15 +12,19 @@ using AutoMapper;
 using AutoMapper.QueryableExtensions;
 using AutoMapper.Configuration;
 
+
 namespace Library_WebAPiServer.Controllers
 {
     [Produces("application/json")]
     [Route("api/[controller]")]
     [ApiController]
-    public class LibraryItemsController : ControllerBase
+    public class LibraryItemsController : Controller //Base
     {
         private DatabaseContext _dbContext;
         private readonly IMapper _mapper;
+
+
+
 
         public LibraryItemsController(DatabaseContext dbContext, IMapper mapper)
         {

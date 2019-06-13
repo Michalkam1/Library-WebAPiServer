@@ -12,7 +12,7 @@ namespace AutoMapper.Mappings
     {
         public AutoMapperProfile()
         {
-            CreateMap<Author, AuthorDTO>().ReverseMap(); ;
+            CreateMap<Author, AuthorDTO>();
             CreateMap<LibraryItem, LibraryItemDTO>();
             CreateMap<ItemStatus, ItemStatusDTO>();
             CreateMap<Status, StatusDTO>();
