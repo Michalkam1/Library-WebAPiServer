@@ -10,5 +10,7 @@ namespace Library_WebAPiServer.Domain.Services
     public interface IAuthorsServices
     {
         Task<IEnumerable<Author>> ListAsync();
+
+        Task<Author> SaveAsync(Author author);
     }
 }

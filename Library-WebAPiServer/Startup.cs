@@ -14,8 +14,11 @@ using Database;
 using Database.Entities;
 using Microsoft.EntityFrameworkCore;
 using AutoMapper;
+using AutoMapper.Mappings;
 using Library_WebAPiServer.Models;
 using Library_WebAPiServer.Domain.Services;
+using Library_WebAPiServer.Domain.Repositories;
+using Library_WebAPiServer.Domain.Persistance.Repositories;
 
 namespace Library_WebAPiServer
 {
@@ -38,13 +41,21 @@ namespace Library_WebAPiServer
                             options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"),
                   b => b.MigrationsAssembly("Database")));
 
-
+            //AutoMapperModelToResource autoMapperModelToResource = new AutoMapperModelToResource();
+            //AutoMapperResourceToModel autoMapperResourceToModel = new AutoMapperResourceToModel();
             services.AddAutoMapper();
+
+            //var config = new MapperConfiguration(cfg => { new AutoMapperModelToResource();
+            //                                              new AutoMapperResourceToModel();
+            //                                            });
+
+            //IMapper mapper = new Mapper(config);
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
             services.AddScoped<IAuthorsRepository, AuthorsRepository>();
             services.AddScoped<IAuthorsServices, AuthorsServices>();
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

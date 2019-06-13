@@ -10,5 +10,6 @@ namespace Library_WebAPiServer.Domain.Services
     public interface IAuthorsRepository
     {
         Task<IEnumerable<Author>> ListAsync();
+        Task AddAsync(Author author);
     }
 }

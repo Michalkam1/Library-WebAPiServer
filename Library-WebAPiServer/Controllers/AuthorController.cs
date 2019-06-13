@@ -37,6 +37,17 @@ namespace Library_WebAPiServer.Controllers
             return authorsReusorces;
         }
 
+        [HttpPost]
+        public async Task<IActionResult> PostAsync(AuthorDTO authorDTO)
+        {
+            var authorIncomming = _mapper.Map<AuthorDTO, Author>(authorDTO);
+            var result = await _authorsService.SaveAsync(authorIncomming);
+
+            var authorsReusorces = _mapper.Map<Author, AuthorDTO>(result);
+
+            return Ok(authorsReusorces);
+        }
+
 
         //[HttpGet]
         //public ActionResult<IEnumerable<AuthorDTO>> GetAll()
@@ -49,22 +60,19 @@ namespace Library_WebAPiServer.Controllers
         //    return authorDTO.ToList();
         //}
 
-        [HttpPost]
+        //[HttpPost]
+        //public void Post(AuthorDTO authorDTO)
+        //{
+        //    AuthorDTO auth = authorDTO;
+        //    _dbContext.Author.AddAsync(new Author()
+        //    {
+        //        Id = authorDTO.Id,
+        //        FirstName = authorDTO.FirstName,
+        //        LastName = authorDTO.LastName
+        //    });
 
-        public void Post(AuthorDTO authorDTO)
-        {
-
-            AuthorDTO auth = authorDTO;
-            _dbContext.Author.AddAsync(new Author()
-            {
-                Id = authorDTO.Id,
-                FirstName = authorDTO.FirstName,
-                LastName = authorDTO.LastName
-            });
-
-            _dbContext.SaveChangesAsync();
-
-        }
+        //    _dbContext.SaveChangesAsync();
+        //}
 
     }
 }

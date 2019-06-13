@@ -14,6 +14,11 @@ namespace Library_WebAPiServer.Domain.Services
     {
         public AuthorsRepository(DatabaseContext context): base(context) { }
 
+        public async Task AddAsync(Author author)
+        {
+            await _context.AddAsync(author);
+        }
+
         public async Task<IEnumerable<Author>> ListAsync()
         {
             return await _context.Author.ToListAsync();
