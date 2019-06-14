@@ -9,30 +9,30 @@ using Library_WebAPiServer.Domain.Repositories;
 
 namespace Library_WebAPiServer.Domain.Services
 {
-    public class AuthorsServices : IAuthorsServices
+    public class LibraryItemService : ILibraryItemService
     {
-        private readonly IAuthorsRepository _authorsRepository;
+        private readonly ILibraryItemRepository _libItemsRepository;
         private readonly IUnitOfWork _unitOfWork;
 
-        public AuthorsServices(IAuthorsRepository authorsRepository, IUnitOfWork unitOfWork)
+        public LibraryItemService(ILibraryItemRepository libItemsRepository, IUnitOfWork unitOfWork)
         {
-            _authorsRepository = authorsRepository;
+            _libItemsRepository = libItemsRepository;
             _unitOfWork = unitOfWork;
         }
 
-        public async Task<IEnumerable<Author>> ListAsync()
+        public async Task<IEnumerable<LibraryItem>> ListAsync()
         {
-            return await _authorsRepository.ListAsync();
+            return await _libItemsRepository.ListAsync();
         }
 
-        public async Task<Author> SaveAsync(Author author)
+        public async Task<LibraryItem> SaveAsync(LibraryItem libItem)
         {
             try
             {
-                await _authorsRepository.AddAsync(author);
+                await _libItemsRepository.AddAsync(libItem);
                 await _unitOfWork.CompleteAsync();
 
-                return author;
+                return libItem;
             }
             catch(Exception ex)
             {

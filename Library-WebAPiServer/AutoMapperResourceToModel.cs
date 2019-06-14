@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using AutoMapper;
 using Library_WebAPiServer.Models;
 using Database.Entities;
+using Library_WebAPiServer.Models.Extensions;
 
 namespace AutoMapper.Mappings
 {
@@ -13,7 +14,9 @@ namespace AutoMapper.Mappings
         public AutoMapperResourceToModel()
         {
             CreateMap<AuthorDTO, Author>();
-            CreateMap<LibraryItemDTO, LibraryItem>();
+            CreateMap<LibraryItemDTO, LibraryItem>().ForMember(src => src.ItemType,
+                            opt => opt.MapFrom(src => (Database.Entities.LibraryItemType)src.ItemType));
+                            //src.ItemType.ToDescriptionString()));
             CreateMap<ItemStatusDTO, ItemStatus>();
             CreateMap<StatusDTO, Status>();
         }

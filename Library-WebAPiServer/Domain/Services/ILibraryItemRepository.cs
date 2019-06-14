@@ -7,10 +7,10 @@ using Database.Entities;
 
 namespace Library_WebAPiServer.Domain.Services
 {
-    public interface IAuthorsRepository
+    public interface ILibraryItemRepository
     {
-        Task<IEnumerable<Author>> ListAsync();
+        Task<IEnumerable<LibraryItem>> ListAsync();
 
-        Task AddAsync(Author author);
+        Task AddAsync(LibraryItem libItem);
     }
 }

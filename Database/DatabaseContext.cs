@@ -10,48 +10,34 @@ namespace Database
         {
         }
 
-        //public DatabaseContext()
-        //{
-        //}
-        public DatabaseContext(): base()//: base("Library")
+        public DatabaseContext(): base()
         {
-            
         }
-
-        //protected override void Seed(DatabaseContext databaseContext)
-        //{
-
-        //}
-
-    //    protected override void Seed(DatabaseContext dbContext)
-    //    {
-    //        base.Seed(dbContext);
-    //        db.Set<Workout>().Add(new Workout { Id = 1, Name = "My First workout user1" })
-
-        //}
 
         public virtual DbSet<Author> Author { get; set; }
         public virtual DbSet<ItemStatus> ItemStatus { get; set; }
         public virtual DbSet<LibraryItem>  LibraryItem { get; set; }
         public virtual DbSet<Status> Status { get; set; }
 
-
-
-
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
 
-            builder.Entity<LibraryItem>()
-                    .Property(e => e.ItemType)
-                    //.HasOne(e => e.Author)
-                    
-                    .HasConversion(
-                        v => v.ToString(),
-                        v => (LibraryItemType)Enum.Parse(typeof(LibraryItemType), v));
-            // Customize the ASP.NET Identity model and override the defaults if needed.
-            // For example, you can rename the ASP.NET Identity table names and more.
-            // Add your customizations after calling base.OnModelCreating(builder);
+            builder.Entity<Author>().ToTable("Author");
+            builder.Entity<Author>().HasKey(a => a.Id);
+            builder.Entity<Author>().Property(a => a.Id).IsRequired().ValueGeneratedOnAdd();
+            builder.Entity<Author>().Property(a => a.LastName).IsRequired();
+
+            builder.Entity<LibraryItem>().ToTable("LibraryItem");
+            builder.Entity<LibraryItem>().HasKey(l => l.Id);
+            builder.Entity<LibraryItem>().Property(l => l.Id).IsRequired().ValueGeneratedOnAdd();
+            builder.Entity<LibraryItem>().Property(l => l.Id).IsRequired();
+            builder.Entity<LibraryItem>().Property(l => l.Title).IsRequired();
+            builder.Entity<LibraryItem>().HasOne(l => l.Author);
+
+
+
+
         }
     }
 }

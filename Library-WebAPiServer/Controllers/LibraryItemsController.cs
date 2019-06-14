@@ -22,37 +22,37 @@ namespace Library_WebAPiServer.Controllers
     public class LibraryItemsController : Controller //Base
     {
         private DatabaseContext _dbContext;
-        private readonly IAuthorsServices _authorsServices;
+        private readonly ILibraryItemService _libItemService;
         private readonly IMapper _mapper;
 
-
-
-
-        public LibraryItemsController(DatabaseContext dbContext, IMapper mapper)
+        public LibraryItemsController(DatabaseContext dbContext, IMapper mapper, ILibraryItemService libItem)
         {
             _dbContext = dbContext;
             _mapper = mapper;
+            _libItemService = libItem;
         }
-
-        //[HttpGet]
-        //public async Task<IEnumerable<LibraryItemDTO>> GetAllAsync()
-        //{
-        //    var authors = await _authorsServices.ListAsync();
-        //    var authorsReusorces = _mapper.Map<IEnumerable<Author>, IEnumerable<AuthorDTO>>();
-        //    return authorsReusorces
-        //}
 
         //GET all
         [HttpGet]
-        public ActionResult<IEnumerable<LibraryItemDTO>> GetAll()
+        public async Task<IEnumerable<LibraryItemDTO>> GetAllAsync()
         {
-            var libraryItems = _dbContext.LibraryItem
-                .Select(li => li.Title)
-                //.Include(li => li.)
-                .ProjectTo<LibraryItemDTO>()
-                .ToList();
-            return libraryItems;
+            var items = await _libItemService.ListAsync();
+            var resources = _mapper.Map<IEnumerable<LibraryItem>, IEnumerable<LibraryItemDTO>>(items);
+            return resources;
         }
+
+
+
+
+        //public ActionResult<IEnumerable<LibraryItemDTO>> GetAll()
+        //{
+        //    var libraryItems = _dbContext.LibraryItem
+        //        .Select(li => li.Title)
+        //        //.Include(li => li.)
+        //        .ProjectTo<LibraryItemDTO>()
+        //        .ToList();
+        //    return libraryItems;
+        //}
         //IQueryable<LibraryItemDTO> libItems = _dbContext.LibraryItem
         //    .Select(item => new LibraryItemDTO()
         //    {
@@ -83,97 +83,5 @@ namespace Library_WebAPiServer.Controllers
 
         }
 
-        //[HttpPost]
-        //public 
-
-        //[HttpPost]
-        //public ActionResult<LibraryItemDTO> Post(LibraryItemDTO libItemDTO)
-        //{
-        //    LibraryItemDTO libItem = libItemDTO;
-
-        //    var cfg = new MapperConfigurationExpression();
-        //    //cfg.CreateMap<Author, AuthorDTO>();
-        //    cfg.CreateMap<LibraryItem, LibraryItemDTO>();
-        //    //cfg.AddProfile<MyProfile>();
-        //    //libItem.InitAutoMapper(cfg);
-
-        //    //Mapper.Initialize(cfg);
-        //    // or
-        //    var mapperConfig = new MapperConfiguration(cfg);
-        //    IMapper mapper = new Mapper(mapperConfig);
-
-
-        //    //var dto = _dbContext.LibraryItem
-        //    //            //.Where(l => l.Id == libItemDTO)
-        //    //            .ProjectTo<LibraryItemDTO>(mapper)
-        //    //            .Select(libItem);
-        //    //            //.SingleOrDefault();
-
-
-        //    _dbContext.LibraryItem.ProjectTo<LibraryItemDTO>(libItem).Add(new LibraryItem()
-        //     {
-        //           //Author = (Author)Mapper.Map<AuthorDTO>(libItemDTO),
-
-        //           // Author = mapper.,
-        //         Title = libItemDTO.Title,
-        //         Cover = libItemDTO.Cover
-        //     });
-
-        //    _dbContext.SaveChanges();
-        //    return libItem;
-        //} 
     }
-    /*
-    public class SimpleMapper<TFrom, TTo>
-    {
-        
-
-        public static TTo Map(TFrom fromModel)
-        {
-            var config = new MapperConfiguration(cfg => {
-                cfg.CreateMap<TFrom, TTo>();
-                //cfg.AddProfile<fromToProf>();
-                cfg.AddMaps("FromTo");
-            });
-
-            var mapper = new Mapper(config);
-            Mapper.CreateMap<TFrom, TTo>();
-            return Mapper.Map<TFrom, TTo>(fromModel);
-        }
-
-        public static IList<TTo> MapList(IList<TFrom> fromModel)
-        {
-            Mapper.CreateMap<TFrom, TTo>();
-            return Mapper.Map<IList<TFrom>, IList<TTo>>(fromModel);
-        }
-    }
-
-    public class RepositoryBase<TModel, TLINQModel>
-    {
-        public IList<TModel> Map<TCustom>(IList<TCustom> model)
-        {
-            return SimpleMapper<TCustom, TModel>.MapList(model);
-        }
-
-        public TModel Map(TLINQModel model)
-        {
-            return SimpleMapper<TLINQModel, TModel>.Map(model);
-        }
-
-        public TLINQModel Map(TModel model)
-        {
-            return SimpleMapper<TModel, TLINQModel>.Map(model);
-        }
-
-        public IList<TModel> Map(IList<TLINQModel> model)
-        {
-            return SimpleMapper<TLINQModel, TModel>.MapList(model);
-        }
-
-        public IList<TLINQModel> Map(IList<TModel> model)
-        {
-            return SimpleMapper<TModel, TLINQModel>.MapList(model);
-        }
-    }
-    */
 }
