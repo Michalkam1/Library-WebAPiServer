@@ -48,31 +48,5 @@ namespace Library_WebAPiServer.Controllers
             return Ok(authorsReusorces);
         }
 
-
-        //[HttpGet]
-        //public ActionResult<IEnumerable<AuthorDTO>> GetAll()
-        //{
-        //    IQueryable<AuthorDTO> authorDTO = _dbContext.Author.Select(item => new AuthorDTO()//.Include(item => item.Author)
-        //    {
-        //        FirstName = item.FirstName,
-        //        LastName = item.LastName
-        //    });
-        //    return authorDTO.ToList();
-        //}
-
-        //[HttpPost]
-        //public void Post(AuthorDTO authorDTO)
-        //{
-        //    AuthorDTO auth = authorDTO;
-        //    _dbContext.Author.AddAsync(new Author()
-        //    {
-        //        Id = authorDTO.Id,
-        //        FirstName = authorDTO.FirstName,
-        //        LastName = authorDTO.LastName
-        //    });
-
-        //    _dbContext.SaveChangesAsync();
-        //}
-
     }
 }
