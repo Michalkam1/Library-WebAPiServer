@@ -14,11 +14,11 @@ namespace TestConsole
             builder.UseSqlServer("Server=(localdb)\\MSSQLLocalDB;Database=Library;");
             using (DatabaseContext databaseContext = new DatabaseContext(builder.Options))
             {
-                var authorName = databaseContext.Authors.First().FirstName;
-                var status = databaseContext.Statuses.First();
+                var authorName = databaseContext.Author.First().FirstName;
+                var status = databaseContext.Status.First();
 
 
-                foreach (var item in databaseContext.ItemStatuses)
+                foreach (var item in databaseContext.ItemStatus)
                 {
                     
                     Console.WriteLine(item.Id);

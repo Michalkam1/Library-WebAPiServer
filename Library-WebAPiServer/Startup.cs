@@ -20,6 +20,10 @@ using Library_WebAPiServer.Domain.Services;
 using Library_WebAPiServer.Domain.Repositories;
 using Library_WebAPiServer.Domain.Persistance.Repositories;
 using Newtonsoft.Json;
+//using Swashbuckle.AspNetCore.Swagger;
+using NJsonSchema;
+using NSwag.AspNetCore;
+
 
 namespace Library_WebAPiServer
 {
@@ -46,6 +50,17 @@ namespace Library_WebAPiServer
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2).AddJsonOptions(options => {
                 options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
             });
+            /*services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new Info
+                {
+                    Version = "v1",
+                    Title = "Test API",
+                    Description = "ASP.NET Core Web API"
+                });
+            });*/
+
+            services.AddSwaggerDocument();
 
             services.AddScoped<IAuthorsRepository, AuthorsRepository>();
             services.AddScoped<IAuthorsServices, AuthorsServices>();
@@ -72,6 +87,14 @@ namespace Library_WebAPiServer
 
             app.UseHttpsRedirection();
             app.UseMvc();
+
+            app.UseSwagger();
+            app.UseSwaggerUi3();
+            /*app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
+            });*/
+
         }
     }
 }

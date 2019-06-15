@@ -1,0 +1,245 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "v1",
+    "title": "Test API",
+    "description": "ASP.NET Core Web API"
+  },
+  "paths": {
+    "/api/Author": {
+      "get": {
+        "tags": [ "Author" ],
+        "operationId": "GetAllAsync",
+        "consumes": [],
+        "produces": [ "application/json" ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "uniqueItems": false,
+              "type": "array",
+              "items": { "$ref": "#/definitions/AuthorDTO" }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [ "Author" ],
+        "operationId": "PostAsync",
+        "consumes": [ "application/json-patch+json", "application/json", "text/json", "application/*+json" ],
+        "produces": [ "application/json" ],
+        "parameters": [
+          {
+            "name": "authorDTO",
+            "in": "body",
+            "required": false,
+            "schema": { "$ref": "#/definitions/AuthorDTO" }
+          }
+        ],
+        "responses": { "200": { "description": "Success" } }
+      }
+    },
+    "/api/LibraryItems": {
+      "get": {
+        "tags": [ "LibraryItems" ],
+        "operationId": "GetAllAsync",
+        "consumes": [],
+        "produces": [ "application/json" ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "uniqueItems": false,
+              "type": "array",
+              "items": { "$ref": "#/definitions/LibraryItemDTO" }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [ "LibraryItems" ],
+        "operationId": "PostItems",
+        "consumes": [ "application/json-patch+json", "application/json", "text/json", "application/*+json" ],
+        "produces": [ "application/json" ],
+        "parameters": [
+          {
+            "name": "libItem",
+            "in": "body",
+            "required": false,
+            "schema": { "$ref": "#/definitions/LibraryItemDTO" }
+          }
+        ],
+        "responses": { "200": { "description": "Success" } }
+      }
+    },
+    "/api/LibraryItems/{Id}": {
+      "get": {
+        "tags": [ "LibraryItems" ],
+        "operationId": "Get",
+        "consumes": [],
+        "produces": [ "application/json" ],
+        "parameters": [
+          {
+            "name": "ItemId",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "Id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "uniqueItems": false,
+              "type": "array",
+              "items": { "$ref": "#/definitions/LibraryItemDTO" }
+            }
+          }
+        }
+      }
+    },
+    "/api/Values": {
+      "get": {
+        "tags": [ "Values" ],
+        "operationId": "GetAll",
+        "consumes": [],
+        "produces": [ "text/plain", "application/json", "text/json" ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "uniqueItems": false,
+              "type": "array",
+              "items": { "type": "string" }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [ "Values" ],
+        "operationId": "Post",
+        "consumes": [ "application/json-patch+json", "application/json", "text/json", "application/*+json" ],
+        "produces": [],
+        "parameters": [
+          {
+            "name": "value",
+            "in": "body",
+            "required": false,
+            "schema": { "type": "string" }
+          }
+        ],
+        "responses": { "200": { "description": "Success" } }
+      }
+    },
+    "/api/Values/{id}": {
+      "get": {
+        "tags": [ "Values" ],
+        "operationId": "Get",
+        "consumes": [],
+        "produces": [ "text/plain", "application/json", "text/json" ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": { "type": "string" }
+          }
+        }
+      },
+      "put": {
+        "tags": [ "Values" ],
+        "operationId": "Put",
+        "consumes": [ "application/json-patch+json", "application/json", "text/json", "application/*+json" ],
+        "produces": [],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "value",
+            "in": "body",
+            "required": false,
+            "schema": { "type": "string" }
+          }
+        ],
+        "responses": { "200": { "description": "Success" } }
+      },
+      "delete": {
+        "tags": [ "Values" ],
+        "operationId": "Delete",
+        "consumes": [],
+        "produces": [],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": { "200": { "description": "Success" } }
+      }
+    }
+  },
+  "definitions": {
+    "AuthorDTO": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "firstName": { "type": "string" },
+        "lastName": { "type": "string" },
+        "libraryItems": {
+          "uniqueItems": false,
+          "type": "array",
+          "items": { "$ref": "#/definitions/LibraryItemDTO" }
+        }
+      }
+    },
+    "LibraryItemDTO": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "author": { "$ref": "#/definitions/AuthorDTO" },
+        "itemType": {
+          "format": "int32",
+          "enum": [ 1, 2, 3 ],
+          "type": "integer"
+        },
+        "cover": { "type": "string" },
+        "issueYear": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "title": { "type": "string" }
+      }
+    }
+  }
+}
