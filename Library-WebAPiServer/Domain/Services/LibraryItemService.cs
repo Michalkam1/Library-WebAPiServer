@@ -12,11 +12,13 @@ namespace Library_WebAPiServer.Domain.Services
     public class LibraryItemService : ILibraryItemService
     {
         private readonly ILibraryItemRepository _libItemsRepository;
+        private readonly IAuthorsRepository _authorsRepository;
         private readonly IUnitOfWork _unitOfWork;
 
-        public LibraryItemService(ILibraryItemRepository libItemsRepository, IUnitOfWork unitOfWork)
+        public LibraryItemService(ILibraryItemRepository libItemsRepository, IAuthorsRepository authorsRepository, IUnitOfWork unitOfWork)
         {
             _libItemsRepository = libItemsRepository;
+            _authorsRepository = authorsRepository;
             _unitOfWork = unitOfWork;
         }
 
@@ -27,17 +29,22 @@ namespace Library_WebAPiServer.Domain.Services
 
         public async Task<LibraryItem> SaveAsync(LibraryItem libItem)
         {
-            try
-            {
+            //try
+            //{
+                var existingAuthor = await _authorsRepository.FindByIdAsync(libItem.Author.Id);
+
+                //libItem.Author = existingAuthor;
+
+
                 await _libItemsRepository.AddAsync(libItem);
                 await _unitOfWork.CompleteAsync();
 
                 return libItem;
-            }
-            catch(Exception ex)
-            {
-                throw new NotImplementedException();
-            }
+            //}
+            //catch(Exception ex)
+            //{
+            //    throw new NotImplementedException();
+            //}
             
         }
     }

@@ -14,7 +14,10 @@ namespace Library_WebAPiServer.Models.Extensions
             FieldInfo info = @enum.GetType().GetField(@enum.ToString());
             var attributes = (DescriptionAttribute[])info.GetCustomAttributes(typeof(DescriptionAttribute), false);
 
+            //if(attributes[0].Description.Contains.)
+
             return attributes?[0].Description ?? @enum.ToString();
+            //return @enum.ToString();
         }
     }
 }

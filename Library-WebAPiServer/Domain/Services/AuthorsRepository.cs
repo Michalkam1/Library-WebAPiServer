@@ -19,9 +19,24 @@ namespace Library_WebAPiServer.Domain.Services
             await _context.AddAsync(author);
         }
 
+        public async Task<Author> FindByIdAsync(int id)
+        {
+            return await _context.Author.FindAsync(id);
+        }
+
         public async Task<IEnumerable<Author>> ListAsync()
         {
             return await _context.Author.ToListAsync();
+        }
+
+        public void Remove(Author author)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Update(Author author)
+        {
+            throw new NotImplementedException();
         }
     }
 }

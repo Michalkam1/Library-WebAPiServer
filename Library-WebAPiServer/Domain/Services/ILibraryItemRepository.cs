@@ -10,7 +10,9 @@ namespace Library_WebAPiServer.Domain.Services
     public interface ILibraryItemRepository
     {
         Task<IEnumerable<LibraryItem>> ListAsync();
-
         Task AddAsync(LibraryItem libItem);
+        Task<LibraryItem> FindByIdAsync(int id);
+        void Update(LibraryItem libItem);
+        void Remove(LibraryItem libItem);
     }
 }

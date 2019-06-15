@@ -14,15 +14,39 @@ namespace Library_WebAPiServer.Domain.Services
     {
         public LibraryItemRepository(DatabaseContext context): base(context) { }
 
+        private readonly IAuthorsRepository _authorsRepository;
+
         public async Task AddAsync(LibraryItem libItem)
         {
-            await _context.AddAsync(libItem);
+
+            //var existingAuthor = await _authorsRepository.FindByIdAsync(libItem.Author.Id);
+
+            //libItem.Author = existingAuthor;
+
+            await _context.LibraryItem.AddAsync(libItem);
+        }
+
+        public async Task<LibraryItem> FindByIdAsync(int id)
+        {
+            return await _context.LibraryItem
+                .Include(a => a.Author)
+                .FirstOrDefaultAsync(a => a.Author.Id == id);
         }
 
         public async Task<IEnumerable<LibraryItem>> ListAsync()
         {
             return await _context.LibraryItem.Include(a => a.Author)
                                              .ToListAsync();
+        }
+
+        public void Remove(LibraryItem libItem)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Update(LibraryItem libItem)
+        {
+            throw new NotImplementedException();
         }
     }
 }
