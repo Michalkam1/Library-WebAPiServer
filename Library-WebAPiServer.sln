@@ -11,7 +11,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AuthDatabase", "AuthDatabas
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TestConsole", "TestConsole\TestConsole.csproj", "{C34F9090-1760-4FA3-844A-51A1B0732E55}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ClientWebApp", "ClientWebApp\ClientWebApp.csproj", "{F90D2836-E103-4DB3-975E-180846D37137}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClientWebApp", "ClientWebApp\ClientWebApp.csproj", "{F90D2836-E103-4DB3-975E-180846D37137}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
