@@ -7,5 +7,6 @@ namespace ClientWebApp.Models
 {
     public class LibraryItemViewModel
     {
+        public LibraryItem[] Items { get; set; }
     }
 }

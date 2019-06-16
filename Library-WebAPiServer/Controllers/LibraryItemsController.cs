@@ -45,18 +45,18 @@ namespace Library_WebAPiServer.Controllers
         }
 
         ////GET
-        [HttpGet("{Id}")]
-        public ActionResult<IEnumerable<LibraryItemDTO>> Get(int ItemId)
-        {
-            IQueryable<LibraryItemDTO> libItems = _dbContext.LibraryItem.Where(item => item.Id == ItemId).Select(item => new LibraryItemDTO()
-            {
-                Id = item.Id,
-                Title = item.Title,
-                Author = Mapper.Map<AuthorDTO>(item),
-                Cover = item.Cover
-            });
-            return libItems.ToList();
-        }
+        //[HttpGet("{Id}")]
+        //public ActionResult<IEnumerable<LibraryItemDTO>> Get(int ItemId)
+        //{
+        //    IQueryable<LibraryItemDTO> libItems = _dbContext.LibraryItem.Where(item => item.Id == ItemId).Select(item => new LibraryItemDTO()
+        //    {
+        //        Id = item.Id,
+        //        Title = item.Title,
+        //        Author = Mapper.Map<AuthorDTO>(item),
+        //        Cover = item.Cover
+        //    });
+        //    return libItems.ToList();
+        //}
 
         [HttpPost]
         public async Task<IActionResult> PostItems([FromBody]LibraryItemDTO libItem)
