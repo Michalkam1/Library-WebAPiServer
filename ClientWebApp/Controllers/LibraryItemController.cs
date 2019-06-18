@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using ClientWebApp.Client;
 using ClientWebApp.Services;
 using ClientWebApp.Models;
+using AutoMapper;
 
 namespace ClientWebApp.Controllers
 {
@@ -14,22 +15,40 @@ namespace ClientWebApp.Controllers
     //[ApiController]
     public class LibraryItemController : Controller//Base
     {
-        private readonly LibraryItemService _libraryItemService;
+        private readonly ILibraryItemService _libraryItemService;
 
-        public LibraryItemController(ILibraryItemService libraryItemService)
+        private readonly IMapper _mapper;
+
+
+        public LibraryItemController(ILibraryItemService libraryItemService, IMapper mapper)
         {
             _libraryItemService = libraryItemService;
+            _mapper = mapper;
         }
 
         public async Task <IActionResult> Index()
         {
-            LibraryItem[] libraryItemsList = await _libraryItemService.GetAll();
+            //LibraryItemViewModel libraryItemsList = await _libraryItemService.GetAll();
 
-            var model = new LibraryItemViewModel()
+            //ICollection<LibraryItem> returnLibItems
+            //    = _mapper.Map<ICollection<LibraryItem>>(libraryItems);
+            //LibraryItem libraryItemsList = await _libraryItemService.GetAll();
+
+            //LibraryItemViewModel[] libraryItemsList = _mapper.Map<LibraryItem>(await _libraryItemService.GetAll()).;
+
+            LibraryItemViewModel[] libraryItemsList = await _libraryItemService.GetAll();
+
+            LibraryViewModel model = new LibraryViewModel()
             {
-                Items =libraryItemsList
+                Items = libraryItemsList
+                //Id = libraryItemsList.Id,
+                //Author = libraryItemsList.Author,
+                //Cover = libraryItemsList.Cover,
+                //IssueYear = libraryItemsList.IssueYear,
+                //ItemType = libraryItemsList.ItemType,
+                //Title = libraryItemsList.Title
             };
-
+            
             return View(model);
         }
     }

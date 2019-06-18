@@ -2,13 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using System.ComponentModel.DataAnnotations;
-
 
 namespace ClientWebApp.Models
 {
-    public class LibraryItemViewModel
+    public class LibraryViewModel
     {
-        LibraryItem libraryItem { get; set; }
+        public LibraryItemViewModel[] Items { get; set; }
     }
 }
