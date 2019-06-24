@@ -12,7 +12,10 @@ namespace ClientWebApp
     {
         public AutoMapperProfile()
         {
-            CreateMap<LibraryItemViewModel, LibraryItemDTO>().ReverseMap();
+            CreateMap<LibraryItemViewModel, LibraryItemDTO>();
+            CreateMap<LibraryItemDTO, LibraryItemViewModel>();
+            CreateMap<AuthorDTO, Author>().ReverseMap();
+            //CreateMap<LibraryItemViewModel, LibraryItemDTO>().ReverseMap();
         }
     }
 }

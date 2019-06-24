@@ -49,7 +49,7 @@ namespace ClientWebApp.Services
 
             //ICollection< LibraryItemViewModel> libraryItems = await libraryServiceClient.GetAllAsync();
 
-            ICollection<LibraryItemViewModel> returnLibItems = _mapper.Map<ICollection<LibraryItemViewModel>>(libraryItems);
+            ICollection<LibraryItemViewModel> returnLibItems = _mapper.Map<ICollection<LibraryItemDTO>, ICollection<LibraryItemViewModel>>(libraryItems);
 
             return returnLibItems.ToArray();
         }

@@ -17,13 +17,14 @@ namespace ClientWebApp.Controllers
     {
         private readonly ILibraryItemService _libraryItemService;
 
-        private readonly IMapper _mapper;
+        //private readonly IMapper _mapper;
 
 
-        public LibraryItemController(ILibraryItemService libraryItemService, IMapper mapper)
+        public LibraryItemController(ILibraryItemService libraryItemService//, IMapper mapper
+            )
         {
             _libraryItemService = libraryItemService;
-            _mapper = mapper;
+            //_mapper = mapper;
         }
 
         public async Task <IActionResult> Index()
@@ -38,7 +39,7 @@ namespace ClientWebApp.Controllers
 
             LibraryItemViewModel[] libraryItemsList = await _libraryItemService.GetAll();
 
-            LibraryViewModel model = new LibraryViewModel()
+            var model = new LibraryViewModel()
             {
                 Items = libraryItemsList
                 //Id = libraryItemsList.Id,
