@@ -20,6 +20,21 @@ namespace ClientWebApp.Controllers
             return View();
         }
 
+        public IActionResult Login()
+        {
+            return View();
+        }
+
+        public IActionResult SearchData()
+        {
+            return View();
+        }
+
+        public IActionResult EnterData()
+        {
+            return View();
+        }
+
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
