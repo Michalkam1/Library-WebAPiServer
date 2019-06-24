@@ -9,8 +9,5 @@ namespace ClientWebApp.Services
     public interface ILibraryItemService
     {
         Task<LibraryItemViewModel[]> GetAll();
-        //Task<ICollection<LibraryItem>> GetAll();
-        //Task<LibraryItemViewModel> GetAll();
-        //Task<LibraryItem[]> GetAll();//ViewModel
     }
 }

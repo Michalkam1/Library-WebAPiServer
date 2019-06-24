@@ -11,43 +11,22 @@ using AutoMapper;
 
 namespace ClientWebApp.Controllers
 {
-    //[Route("api/[controller]")]
-    //[ApiController]
-    public class LibraryItemController : Controller//Base
+    public class LibraryItemController : Controller
     {
         private readonly ILibraryItemService _libraryItemService;
 
-        //private readonly IMapper _mapper;
-
-
-        public LibraryItemController(ILibraryItemService libraryItemService//, IMapper mapper
-            )
+        public LibraryItemController(ILibraryItemService libraryItemService)
         {
             _libraryItemService = libraryItemService;
-            //_mapper = mapper;
         }
 
-        public async Task <IActionResult> Index()
+        public async Task <IActionResult> LibraryItemsList()
         {
-            //LibraryItemViewModel libraryItemsList = await _libraryItemService.GetAll();
-
-            //ICollection<LibraryItem> returnLibItems
-            //    = _mapper.Map<ICollection<LibraryItem>>(libraryItems);
-            //LibraryItem libraryItemsList = await _libraryItemService.GetAll();
-
-            //LibraryItemViewModel[] libraryItemsList = _mapper.Map<LibraryItem>(await _libraryItemService.GetAll()).;
-
             LibraryItemViewModel[] libraryItemsList = await _libraryItemService.GetAll();
 
             var model = new LibraryViewModel()
             {
                 Items = libraryItemsList
-                //Id = libraryItemsList.Id,
-                //Author = libraryItemsList.Author,
-                //Cover = libraryItemsList.Cover,
-                //IssueYear = libraryItemsList.IssueYear,
-                //ItemType = libraryItemsList.ItemType,
-                //Title = libraryItemsList.Title
             };
             
             return View(model);

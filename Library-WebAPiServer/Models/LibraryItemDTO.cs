@@ -21,7 +21,6 @@ namespace Library_WebAPiServer.Models
     {
         public int Id { get; set; }
         public AuthorDTO Author { get; set; }
-        //public int Author { get; set; }
         public LibraryItemType ItemType { get; set; }
         public string Cover { get; set; }
         public DateTime IssueYear { get; set; }

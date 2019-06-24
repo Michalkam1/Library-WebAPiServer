@@ -15,7 +15,6 @@ namespace ClientWebApp
             CreateMap<LibraryItemViewModel, LibraryItemDTO>();
             CreateMap<LibraryItemDTO, LibraryItemViewModel>();
             CreateMap<AuthorDTO, Author>().ReverseMap();
-            //CreateMap<LibraryItemViewModel, LibraryItemDTO>().ReverseMap();
         }
     }
 }

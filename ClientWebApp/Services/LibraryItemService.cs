@@ -21,33 +21,11 @@ namespace ClientWebApp.Services
             _mapper = mapper;
         }
 
-
-        //public async Task<LibraryItemViewModel[]> GetAll()
-        //{
-        //    LibraryItemsClient libraryServiceClient = new LibraryItemsClient(httpClient);
-        //    ICollection<LibraryItemDTO> libraryItems = await libraryServiceClient.GetAllAsync();
-
-        //    //ICollection<LibraryItemViewModel> returnLibItems
-        //    //    = _mapper.Map<ICollection<LibraryItemViewModel>>(libraryItems);
-
-        //    ICollection<LibraryItem> returnLibItems
-        //                            = _mapper.Map<ICollection<LibraryItem>>(libraryItems);
-
-
-        //    return returnLibItems.ToArray();
-        //}
-
         public async Task<LibraryItemViewModel[]> GetAll()
         {
             LibraryItemsClient libraryServiceClient = new LibraryItemsClient(httpClient);
-            //ICollection<LibraryItemDTO> libraryItems = await libraryServiceClient.GetAllAsync();
 
             ICollection<LibraryItemDTO> libraryItems = await libraryServiceClient.GetAllAsync();
-
-            //ICollection<LibraryItemDTO> libraryItemsArray = libraryItems.ToArray();
-
-
-            //ICollection< LibraryItemViewModel> libraryItems = await libraryServiceClient.GetAllAsync();
 
             ICollection<LibraryItemViewModel> returnLibItems = _mapper.Map<ICollection<LibraryItemDTO>, ICollection<LibraryItemViewModel>>(libraryItems);
 
