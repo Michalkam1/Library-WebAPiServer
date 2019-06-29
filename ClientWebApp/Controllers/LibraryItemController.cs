@@ -8,16 +8,25 @@ using ClientWebApp.Client;
 using ClientWebApp.Services;
 using ClientWebApp.Models;
 using AutoMapper;
+using AuthDatabase.Entities;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 
 namespace ClientWebApp.Controllers
 {
     public class LibraryItemController : Controller
     {
         private readonly ILibraryItemService _libraryItemService;
+        //private readonly UserManager<AppUser> _userManager;
 
-        public LibraryItemController(ILibraryItemService libraryItemService)
+
+        public LibraryItemController(ILibraryItemService libraryItemService
+            //, UserManager<AppUser> userManager
+            )
         {
             _libraryItemService = libraryItemService;
+            //_userManager = userManager;
+
         }
 
         public async Task <IActionResult> LibraryItemsList()

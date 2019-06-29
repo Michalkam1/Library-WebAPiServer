@@ -1,4 +1,10 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.AspNetCore.Identity
+@using AuthDatabase.Entities;
+
+@*@inject SignInManager<AppUser> SignInManager
+@inject UserManager<AppUser> UserManager*@
+
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
@@ -13,7 +19,7 @@
               asp-fallback-href="~/lib/bootstrap/dist/css/bootstrap.min.css"
               asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute"
               crossorigin="anonymous"
-              integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"/>
+              integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" />
     </environment>
     <link rel="stylesheet" href="~/css/site.css" />
 </head>
@@ -43,8 +49,10 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="LibraryItem" asp-action="LibraryItemsList">Lista elementów</a>
                         </li>
-
                     </ul>
+                </div>
+                <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
+                    @await Html.PartialAsync("_LoginPartial")
                 </div>
             </div>
         </nav>
