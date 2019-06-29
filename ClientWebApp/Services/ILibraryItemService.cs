@@ -9,5 +9,6 @@ namespace ClientWebApp.Services
     public interface ILibraryItemService
     {
         Task<LibraryItemViewModel[]> GetAll();
+        Task<int> AddLibraryItem(LibraryItemViewModel newItem);
     }
 }
