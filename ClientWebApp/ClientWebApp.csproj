@@ -35,4 +35,9 @@
     <Folder Include="Areas\LibraryItem\Views\" />
   </ItemGroup>
 
+
+  <ItemGroup>
+    <None Include="wwwroot\Images\Library.jpg" />
+  </ItemGroup>
+
 </Project>

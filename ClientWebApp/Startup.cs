@@ -66,7 +66,7 @@ namespace ClientWebApp
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();
-            app.UseCookiePolicy();
+           // app.UseCookiePolicy();
 
             app.UseMvc(routes =>
             {
