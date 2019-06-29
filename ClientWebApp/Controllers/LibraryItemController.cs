@@ -40,5 +40,17 @@ namespace ClientWebApp.Controllers
             
             return View(model);
         }
+
+        public async Task<IActionResult> AddLibraryItem(LibraryItemViewModel newItem)
+        {
+            int successfullTran = await _libraryItemService.AddLibraryItem(newItem);
+            if (successfullTran > 0)
+            {
+                return BadRequest("Could not add item.");
+            }
+
+            return RedirectToAction("LibraryItemsList");
+
+        }
     }
 }

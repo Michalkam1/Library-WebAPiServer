@@ -32,6 +32,25 @@ namespace ClientWebApp.Services
             return returnLibItems.ToArray();
         }
 
+        public Task<int> AddLibraryItem(LibraryItemViewModel newItem)
+        {
+            throw new NotImplementedException();
+        }
 
+        //    public async Task<int> AddLibraryItem(LibraryItemViewModel newItem)
+        //    {
+        //        LibraryItemsClient libraryServiceClient = new LibraryItemsClient(httpClient);
+
+        //        LibraryItemDTO returnValue = await libraryServiceClient.PostItemsAsync(_mapper.Map<LibraryItemDTO>(newItem));
+
+
+
+        //        //ICollection<LibraryItemDTO> libraryItems = await libraryServiceClient.GetAllAsync();
+
+        //        //ICollection<LibraryItemViewModel> returnLibItems = _mapper.Map<ICollection<LibraryItemDTO>, ICollection<LibraryItemViewModel>>(libraryItems);
+
+        //        return returnValue;
+        //    }
+        //}
     }
 }
