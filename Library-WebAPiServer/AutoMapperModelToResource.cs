@@ -13,7 +13,7 @@ namespace AutoMapper.Mappings
     {
         public AutoMapperModelToResource()
         {
-            CreateMap<Author, AuthorDTO>();
+            CreateMap<Author, AuthorDTO>().ReverseMap();
             CreateMap<LibraryItem, LibraryItemDTO>()
                 .ForMember(src => src.ItemType,
                             opt => opt.MapFrom(src => src.ItemType.ToDescriptionString()));

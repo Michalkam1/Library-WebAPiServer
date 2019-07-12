@@ -12,6 +12,8 @@
 
 
   <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="8.1.1" />
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="6.1.1" />
     <PackageReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc" Version="2.2.0" />
     <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.2.0" PrivateAssets="All" />
@@ -23,6 +25,19 @@
   <ItemGroup>
     <ProjectReference Include="..\AuthDatabase\AuthDatabase.csproj" />
     <ProjectReference Include="..\Database\Database.csproj" />
+  </ItemGroup>
+
+
+  <ItemGroup>
+    <Folder Include="Areas\LibraryItem\Controllers\" />
+    <Folder Include="Areas\LibraryItem\Data\" />
+    <Folder Include="Areas\LibraryItem\Models\" />
+    <Folder Include="Areas\LibraryItem\Views\" />
+  </ItemGroup>
+
+
+  <ItemGroup>
+    <None Include="wwwroot\Images\Library.jpg" />
   </ItemGroup>
 
 </Project>

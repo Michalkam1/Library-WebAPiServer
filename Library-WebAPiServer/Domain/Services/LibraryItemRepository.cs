@@ -18,11 +18,6 @@ namespace Library_WebAPiServer.Domain.Services
 
         public async Task AddAsync(LibraryItem libItem)
         {
-
-            //var existingAuthor = await _authorsRepository.FindByIdAsync(libItem.Author.Id);
-
-            //libItem.Author = existingAuthor;
-
             await _context.LibraryItem.AddAsync(libItem);
         }
 

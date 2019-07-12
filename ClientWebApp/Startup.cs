@@ -9,6 +9,12 @@ using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using ClientWebApp.Services;
+using AutoMapper;
+using AuthDatabase;
+using AuthDatabase.Entities;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 
 namespace ClientWebApp
 {
@@ -24,13 +30,22 @@ namespace ClientWebApp
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddDbContext<AuthDatabaseContext>(options =>
+                    options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"),
+                    b => b.MigrationsAssembly("AuthDatabase")));
+
+            services.AddIdentity<AppUser, IdentityRole>()
+              .AddEntityFrameworkStores<AuthDatabaseContext>()
+              .AddDefaultTokenProviders();
+
             services.Configure<CookiePolicyOptions>(options =>
             {
                 // This lambda determines whether user consent for non-essential cookies is needed for a given request.
                 options.CheckConsentNeeded = context => true;
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
-
+            services.AddAutoMapper();
+            services.AddTransient<ILibraryItemService, LibraryItemService>();
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
         }
@@ -51,7 +66,7 @@ namespace ClientWebApp
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();
-            app.UseCookiePolicy();
+           // app.UseCookiePolicy();
 
             app.UseMvc(routes =>
             {

@@ -8,6 +8,7 @@ namespace Database
     {
         public DatabaseContext(DbContextOptions options) : base(options)
         {
+            //lazy loading
         }
 
         public DatabaseContext(): base()
@@ -21,7 +22,7 @@ namespace Database
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
-            base.OnModelCreating(builder);
+            
 
             builder.Entity<Author>().ToTable("Author");
             builder.Entity<Author>().HasKey(a => a.Id);
@@ -36,7 +37,7 @@ namespace Database
             builder.Entity<LibraryItem>().HasOne(l => l.Author);
 
 
-
+            base.OnModelCreating(builder);
 
         }
     }

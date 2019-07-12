@@ -44,29 +44,12 @@ namespace Library_WebAPiServer.Controllers
             return resources;
         }
 
-        ////GET
-        [HttpGet("{Id}")]
-        public ActionResult<IEnumerable<LibraryItemDTO>> Get(int ItemId)
-        {
-            IQueryable<LibraryItemDTO> libItems = _dbContext.LibraryItem.Where(item => item.Id == ItemId).Select(item => new LibraryItemDTO()
-            {
-                Id = item.Id,
-                Title = item.Title,
-                Author = Mapper.Map<AuthorDTO>(item),
-                Cover = item.Cover
-            });
-            return libItems.ToList();
-        }
+        //Do zrobienia w tym miejscu jest httpGet, ale z paramertrem Id
+
 
         [HttpPost]
         public async Task<IActionResult> PostItems([FromBody]LibraryItemDTO libItem)
-        //public async Task<IActionResult> PostItems(Json libItem)
-        //public async Task<IActionResult> PostItems([FromBody] string JSONlibItem)
         {
-            //LibraryItemDTO libItem = JsonConvert.DeserializeObject<string>(JSONlibItem);
-
-            //LibraryItemDTO libItem = new System.Web.Script.Serialization.JavaScriptSerializer().Deserialize<LibraryItemDTO>(JSONlibItem);
-
             var itemIncomming = _mapper.Map<LibraryItemDTO, LibraryItem>(libItem);
             var resource = await _libItemService.SaveAsync(itemIncomming);
 

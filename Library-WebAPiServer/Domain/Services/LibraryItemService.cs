@@ -33,9 +33,6 @@ namespace Library_WebAPiServer.Domain.Services
             //{
                 var existingAuthor = await _authorsRepository.FindByIdAsync(libItem.Author.Id);
 
-                //libItem.Author = existingAuthor;
-
-
                 await _libItemsRepository.AddAsync(libItem);
                 await _unitOfWork.CompleteAsync();
 
