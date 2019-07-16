@@ -1,5 +1,4 @@
 ﻿@model LibraryViewModel;
-@*@using Humanizer;*@
 @{
     ViewData["Title"] = "Library Items";
 }
@@ -24,21 +23,10 @@
         @foreach (var item in Model.Items)
         {
             <tr>
-                <td>
-                    @*<form asp-action="MarkDone" method="POST">
-                            <input type="checkbox" class="done-checkbox" onchange="this.form.submit()">
-                            <input type="hidden" name="id" value="@item.Id">
-                        </form>*@
-                </td>
+                <td>&#x25BB;</td>
                 <td>@item.Author.FirstName @item.Author.LastName</td>
                 <td>@item.Title</td>
             </tr>
         }
     </table>
-
-    @*<div class="panel-footer add-item-form">
-
-        @await Html.PartialAsync("_AddItemPartial", new LibraryItemViewModel())
-    </div>*@
-
 </div>

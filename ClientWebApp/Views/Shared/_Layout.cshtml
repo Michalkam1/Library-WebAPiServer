@@ -1,8 +1,8 @@
 ﻿@using Microsoft.AspNetCore.Identity
 @using AuthDatabase.Entities;
 
-@*@inject SignInManager<AppUser> SignInManager
-@inject UserManager<AppUser> UserManager*@
+@inject SignInManager<AppUser> SignInManager
+@inject UserManager<AppUser> UserManager
 
 <!DOCTYPE html>
 <html>
@@ -46,9 +46,11 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="SearchData">Wyszukaj</a>
                         </li>
+                        @*@if (SignInManager.IsSignedIn(User)) {*@
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="LibraryItem" asp-action="AddLibraryItem">Wprowadź Dane</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="LibraryItem" asp-action="EnterData">Wprowadź Dane</a>
                         </li>
+                        @* } *@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="LibraryItem" asp-action="LibraryItemsList">Lista elementów</a>
                         </li>
