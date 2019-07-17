@@ -1,32 +1,39 @@
 ﻿@model LibraryViewModel;
 @{
-    ViewData["Title"] = "Library Items";
+    ViewData["Title"] = "Lista Elementów";
 }
 
 <div class="text-center">
-    <h1 class="display-4">Library Items!</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    <h1 class="display-4">Zawartość Biblioteki</h1>
 </div>
 
 <div class="panel panel-default todo-panel">
-    <div class="panel-heading">@ViewData["Title"]</div>
+    
 
-    <table class="table table-hover">
+    <table class="table table-bordered table-hover">
         <thead>
             <tr>
-                <td>&#x2714;</td>
-                <td>Item</td>
-                <td>Due</td>
+                @*<th>&#x2714;</th>*@
+                <th>Tytuł</th>
+                <th>Imię i Nazwisko Autora</th>
+                <th>Rok Wydania</th>
+                <th>Nośnik</th>
+
             </tr>
         </thead>
 
         @foreach (var item in Model.Items)
         {
-            <tr>
-                <td>&#x25BB;</td>
-                <td>@item.Author.FirstName @item.Author.LastName</td>
-                <td>@item.Title</td>
-            </tr>
+        <tr>
+            @*<td>&#x25BB;</td>*@
+
+            <td>@item.Title</td>
+            <td>@item.Author.FirstName @item.Author.LastName</td>
+            <td>@item.IssueYear.Year</td>
+            <td>@item.ItemType</td>
+
+
+        </tr>
         }
     </table>
 </div>
