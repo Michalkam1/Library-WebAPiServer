@@ -1,0 +1,53 @@
+﻿@model LibraryItemViewModel;
+
+@{
+    ViewData["Title"] = "EnterData";
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Dodaj element do biblioteki</title>
+</head>
+<body>
+
+    <form asp-action="SaveLibraryItem" method="post">
+        <fieldset>
+            <legend>Informacje</legend>
+            <div class="form-group">
+                <label for="Title">Tytuł:</label>
+                <input type="text" class="form-control" name="Title" placeholder="Tytuł" value="@Model.Title" />
+            </div>
+
+            <div class="form-group">
+                <label for="Author">Imię autora:</label>
+
+                @*W tym miejscu próbuję dodać drop down list do wyboru autorów*@
+                @* @Html.DropDownList("AuthorsViewBag")*@
+
+
+                <input type="text" class="form-control" name="Author" placeholder="Autor" /> <!--value="/*Model.Author.FirstName*/"-->
+            </div>
+
+            <div class="form-group">
+                <label for="IssueYear">Data wydania</label>
+                <input type="date" class="form-control" name="IssueYear" placeholder="Rok" value="@Model.IssueYear" />
+            </div>
+
+            @*<div class="form-group">
+            <label for="ItemType">Nośnik:</label>
+            <input type="text" class="form-control" name="ItemType" placeholder="np: Książka" />
+        </div>*@
+
+            @*<div class="form-group">
+            <label for="Cover">Okładka:</label>
+            <input type="text" class="form-control" name="Cover" placeholder="Okładka" />
+        </div>*@
+
+            <p><input type="submit" class="btn btn-primary" name="buttonSubmit" value="Dodaj Element" /></p>
+
+        </fieldset>
+    </form>
+</body>
+</html>
+

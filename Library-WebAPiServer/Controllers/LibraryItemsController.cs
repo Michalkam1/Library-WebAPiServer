@@ -44,9 +44,6 @@ namespace Library_WebAPiServer.Controllers
             return resources;
         }
 
-        //Do zrobienia w tym miejscu jest httpGet, ale z paramertrem Id
-
-
         [HttpPost]
         public async Task<IActionResult> PostItems([FromBody]LibraryItemDTO libItem)
         {
@@ -56,8 +53,9 @@ namespace Library_WebAPiServer.Controllers
             var itemsReusorces = _mapper.Map<LibraryItem, LibraryItemDTO>(resource);
 
             return Ok(itemsReusorces);
-
         }
+
+
 
     }
 }
