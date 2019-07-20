@@ -7,6 +7,17 @@
     <h1 class="display-4">Zawartość Biblioteki</h1>
 </div>
 
+<form asp-controller="LibraryItem" asp-action="LibraryItemsList" method="get">
+    <p>
+
+        Tytuł: <input type="text" name="SearchTitle">
+        Imię Autora: <input type="text" name="SearchAuthorFirstName">
+        Nazwisko Autora: <input type="text" name="SearchAuthorLastName">
+        Nośnik: <input type="text" name="SearchItemType">
+        <input type="submit" value="Filtr" />
+    </p>
+</form>
+
 <div class="panel panel-default todo-panel">
     
 

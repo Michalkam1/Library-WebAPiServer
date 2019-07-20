@@ -28,17 +28,47 @@ namespace ClientWebApp.Controllers
 
         }
 
-        public async Task <IActionResult> LibraryItemsList()
+
+        //[HttpPost]
+        //public string LibraryItemsList(string searchString, bool notUsed)
+        //{
+        //    return "From [HttpPost]Index: filter on " + searchString;
+        //}
+
+        public async Task<IActionResult> LibraryItemsList(string searchTitle, string searchAuthorFirstName, string searchAuthorLastName, string searchItemType)
         {
             LibraryItemViewModel[] libraryItemsList = await _libraryItemService.GetAll();
 
+            var items = from m in libraryItemsList
+                        select m;
+
+            if (!String.IsNullOrEmpty(searchTitle))
+            {
+                items = items.Where(s => s.Title.ToLower().Contains(searchTitle.ToLower()));
+            }
+
+            if (!String.IsNullOrEmpty(searchAuthorFirstName))
+            {
+                items = items.Where(s => s.Author.FirstName.ToLower().Contains(searchAuthorFirstName.ToLower()));
+            }
+
+            if (!String.IsNullOrEmpty(searchAuthorLastName))
+            {
+                items = items.Where(s => s.Author.LastName.ToLower().Contains(searchAuthorLastName.ToLower()));
+            }
+
+           
+
             var model = new LibraryViewModel()
             {
-                Items = libraryItemsList
+                Items = items.ToArray()
+                //Items = libraryItemsList
             };
-            
+
             return View(model);
         }
+
+        
 
         //public ViewResult EnterData()//(UserManager<AppUser> userManager)
         public async Task<IActionResult> EnterData()
