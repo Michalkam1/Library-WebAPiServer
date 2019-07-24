@@ -34,7 +34,9 @@ namespace Library_WebAPiServer.Controllers
         {
             var author = await _authorsService.ListAsync();
             var authorsReusorces = _mapper.Map<IEnumerable<Author>, IEnumerable<AuthorDTO>>(author);
+            //var auth = authorsReusorces.Select(a => a.Id).Distinct();
             return authorsReusorces;
+            
         }
 
         [HttpPost]

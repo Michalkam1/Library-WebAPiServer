@@ -33,6 +33,7 @@
     <Folder Include="Areas\LibraryItem\Data\" />
     <Folder Include="Areas\LibraryItem\Models\" />
     <Folder Include="Areas\LibraryItem\Views\" />
+    <Folder Include="Views\Author\" />
   </ItemGroup>
 
 

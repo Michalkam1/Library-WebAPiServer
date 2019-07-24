@@ -18,22 +18,17 @@ namespace ClientWebApp.Controllers
     public class LibraryItemController : Controller
     {
         private readonly ILibraryItemService _libraryItemService;
+        private readonly IAuthorService _authorService;
         private readonly UserManager<AppUser> _userManager;
 
 
-        public LibraryItemController(ILibraryItemService libraryItemService, UserManager<AppUser> userManager)
+        public LibraryItemController(ILibraryItemService libraryItemService, IAuthorService authorService, UserManager<AppUser> userManager)
         {
             _libraryItemService = libraryItemService;
+            _authorService = authorService;
             _userManager = userManager;
-
         }
 
-
-        //[HttpPost]
-        //public string LibraryItemsList(string searchString, bool notUsed)
-        //{
-        //    return "From [HttpPost]Index: filter on " + searchString;
-        //}
 
         public async Task<IActionResult> LibraryItemsList(string searchTitle, string searchAuthorFirstName, string searchAuthorLastName, string searchItemType)
         {
@@ -68,48 +63,34 @@ namespace ClientWebApp.Controllers
             return View(model);
         }
 
-        
-
-        //public ViewResult EnterData()//(UserManager<AppUser> userManager)
         public async Task<IActionResult> EnterData()
         {
             LibraryItemViewModel[] libraryItemsList = await _libraryItemService.GetAll();
             var model = new LibraryItemViewModel();
-            List<Author> list = new List<Author>();
-            //IEnumerable<SelectListItem>;
-            foreach (var a in libraryItemsList) 
+            Author[] listaAutorow = await _authorService.GetAuthors(); 
+
+            var authors = listaAutorow.Select(a => new SelectListItem
             {
-                if (!list.Contains(a.Author))
-                {
-                    list.Add(a.Author);
-                }
-            }
-            // = libraryItemsList
-            ViewBag.AuthorsViewBag = list;
+                Text = a.LastName.ToString() + ' ' + a.FirstName.ToString(),
+                Value = a.Id.ToString()
+            });
+
+            //ViewBag.AuthorsViewBag = authors;
+            ViewBag.AuthorsViewBag = new SelectList(authors, "Value", "Text");
+
             return View(model);
         }
 
-
-
-        //public async Task<IActionResult> SaveLibraryItem(LibraryItemViewModel newItem)
-        //{
-        //    int successfullTran = await _libraryItemService.AddLibraryItem(newItem);
-        //    if (successfullTran > 0)
-        //    {
-        //        return BadRequest("Could not add item.");
-        //    }
-
-        //    return RedirectToAction("LibraryItemsList");
-
-        //}
-
+        //[HttpPost]
         public async Task<IActionResult> SaveLibraryItem(LibraryItemViewModel newItem)
         {
-            int successfullTran = await _libraryItemService.AddLibraryItem(newItem);
-            if (successfullTran > 0)
-            {
-                return BadRequest("Could not add item.");
-            }
+            
+            //int successfullTran = await _libraryItemService.AddLibraryItem(newItem);
+            var successfullTran = await _libraryItemService.AddLibraryItem(newItem);
+            //if (successfullTran > 0)
+            //{
+            //    return BadRequest("Could not add item.");
+            //}
 
             return RedirectToAction("LibraryItemsList");
 

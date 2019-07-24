@@ -46,6 +46,7 @@ namespace ClientWebApp
             });
             services.AddAutoMapper();
             services.AddTransient<ILibraryItemService, LibraryItemService>();
+            services.AddTransient<IAuthorService, AuthorService>();
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
         }
