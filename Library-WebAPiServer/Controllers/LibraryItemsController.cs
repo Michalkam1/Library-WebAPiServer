@@ -28,6 +28,7 @@ namespace Library_WebAPiServer.Controllers
         private readonly ILibraryItemService _libItemService;
         private readonly IMapper _mapper;
 
+        
         public LibraryItemsController(DatabaseContext dbContext, IMapper mapper, ILibraryItemService libItem)
         {
             _dbContext = dbContext;
@@ -41,6 +42,7 @@ namespace Library_WebAPiServer.Controllers
         {
             var items = await _libItemService.ListAsync();
             var resources = _mapper.Map<IEnumerable<LibraryItem>, IEnumerable<LibraryItemDTO>>(items);
+
             return resources;
         }
 

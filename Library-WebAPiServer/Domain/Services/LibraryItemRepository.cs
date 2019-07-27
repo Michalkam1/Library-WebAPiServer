@@ -30,8 +30,9 @@ namespace Library_WebAPiServer.Domain.Services
 
         public async Task<IEnumerable<LibraryItem>> ListAsync()
         {
-            return await _context.LibraryItem.Include(a => a.Author)
-                                             .ToListAsync();
+            return await _context.LibraryItem
+                .Include(a => a.Author)
+                .ToListAsync();
         }
 
         public void Remove(LibraryItem libItem)

@@ -22,6 +22,7 @@ namespace ClientWebApp.Services
             _mapper = mapper;
         }
 
+        [HttpGet]
         public async Task<LibraryItemViewModel[]> GetAll()
         {
             LibraryItemsClient libraryServiceClient = new LibraryItemsClient(httpClient);
@@ -39,6 +40,7 @@ namespace ClientWebApp.Services
         //}
 
         //public async Task<int> AddLibraryItem(LibraryItemViewModel newItem)
+        [HttpPost]
         public async Task<FileResponse> AddLibraryItem(LibraryItemViewModel newItem)
         {
             LibraryItemsClient libraryServiceClient = new LibraryItemsClient(httpClient);
