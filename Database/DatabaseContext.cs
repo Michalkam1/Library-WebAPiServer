@@ -1,5 +1,6 @@
 ﻿using Database.Entities;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using System;
 
 namespace Database
@@ -19,6 +20,7 @@ namespace Database
         public virtual DbSet<ItemStatus> ItemStatus { get; set; }
         public virtual DbSet<LibraryItem>  LibraryItem { get; set; }
         public virtual DbSet<Status> Status { get; set; }
+        //public virtual DbSet<LibraryItemType> LibraryItemTypes { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
@@ -36,6 +38,12 @@ namespace Database
             builder.Entity<LibraryItem>().Property(l => l.Title).IsRequired();
             builder.Entity<LibraryItem>().HasOne(l => l.Author);
 
+            //builder.Entity<LibraryItem>().Property(l => l.ItemType).HasConversion(
+            //    e => e.ToString(),
+            //    e => (LibraryItemType)Enum.Parse(typeof(LibraryItemType), e));
+
+            //var converter = new EnumToStringConverter<LibraryItemType>();
+            //builder.Entity<LibraryItem>().Property(l => l.ItemType).HasConversion(converter);
 
             base.OnModelCreating(builder);
 

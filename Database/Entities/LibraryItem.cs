@@ -1,11 +1,22 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Text;
 
 namespace Database.Entities
 {
+    //public enum LibraryItemType { 1, 2, 3 };
     public enum LibraryItemType { DVD, CD, Book };
+    //public enum LibraryItemType : byte
+    //{
+    //    [Description("DVD")]
+    //    DVD = 1,
+    //    [Description("CD")]
+    //    CD = 2,
+    //    [Description("Book")]
+    //    Book = 3
+    //};
 
     public class LibraryItem
     {

@@ -75,7 +75,6 @@ namespace ClientWebApp.Controllers
                 Value = a.Id.ToString()
             });
 
-            //ViewBag.AuthorsViewBag = authors;
             ViewBag.AuthorsViewBag = new SelectList(authors, "Value", "Text");
             
 
@@ -96,5 +95,20 @@ namespace ClientWebApp.Controllers
             return RedirectToAction("LibraryItemsList");
 
         }
+
+        //public async Task<IActionResult> SaveAuthor(Author newAuthor)
+        //{
+
+        //    //int successfullTran = await _libraryItemService.AddLibraryItem(newItem);
+        //    var successfullTran = await _authorService.AddAuthor(newAuthor);
+        //    //if (successfullTran > 0)
+        //    //{
+        //    //    return BadRequest("Could not add item.");
+        //    //}
+
+        //    return RedirectToAction("EnterData");
+
+        //}
+
     }
 }

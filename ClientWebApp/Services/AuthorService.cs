@@ -21,9 +21,12 @@ namespace ClientWebApp.Services
             _mapper = mapper;
         }
 
-        public Task<int> AddAuthor(Author author)
+        public async Task<FileResponse> AddAuthor(Author newAuthor)
         {
-            throw new NotImplementedException();
+            AuthorClient authorServiceClient = new AuthorClient(httpClient);
+
+            var returnValue = await authorServiceClient.PostAsync(_mapper.Map<AuthorDTO>(newAuthor));
+            return returnValue;
         }
 
         public async Task<Author[]> GetAuthors()

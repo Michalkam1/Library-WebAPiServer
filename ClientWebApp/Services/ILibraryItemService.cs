@@ -12,6 +12,5 @@ namespace ClientWebApp.Services
     {
         Task<LibraryItemViewModel[]> GetAll();
         Task<FileResponse> AddLibraryItem(LibraryItemViewModel newItem);
-        //Task<int> AddLibraryItem(LibraryItemViewModel newItem);
     }
 }

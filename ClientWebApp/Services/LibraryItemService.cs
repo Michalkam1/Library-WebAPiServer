@@ -34,23 +34,12 @@ namespace ClientWebApp.Services
             return returnLibItems.ToArray();
         }
 
-        //public Task<int> AddLibraryItem(LibraryItemViewModel newItem)
-        //{
-        //    throw new NotImplementedException();
-        //}
 
-        //public async Task<int> AddLibraryItem(LibraryItemViewModel newItem)
         [HttpPost]
         public async Task<FileResponse> AddLibraryItem(LibraryItemViewModel newItem)
         {
             LibraryItemsClient libraryServiceClient = new LibraryItemsClient(httpClient);
-            //var firstMap = await libraryServiceClient.PostItemsAsync(_mapper.Map<FileResponse, LibraryItemDTO>(newItem);
             var returnValue = await libraryServiceClient.PostItemsAsync(_mapper.Map<LibraryItemDTO>(newItem));
-            //LibraryItemDTO
-            
-            //ICollection<LibraryItemDTO> libraryItems = await libraryServiceClient.GetAllAsync();
-
-            //ICollection<LibraryItemViewModel> returnLibItems = _mapper.Map<ICollection<LibraryItemDTO>, ICollection<LibraryItemViewModel>>(libraryItems);
 
             return returnValue;
         }
