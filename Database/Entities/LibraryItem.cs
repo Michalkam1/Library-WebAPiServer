@@ -7,7 +7,11 @@ using System.Text;
 namespace Database.Entities
 {
     //public enum LibraryItemType { 1, 2, 3 };
-    public enum LibraryItemType { DVD, CD, Book };
+
+
+    //public enum LibraryItemType { DVD, CD, Book };
+
+
     //public enum LibraryItemType : byte
     //{
     //    [Description("DVD")]
@@ -24,7 +28,8 @@ namespace Database.Entities
 
         public virtual Author Author { get; set; }
 
-        public LibraryItemType ItemType { get; set; }
+        //public LibraryItemType ItemType { get; set; }
+        public int ItemType { get; set; }
 
         public string Cover { get; set; }
 

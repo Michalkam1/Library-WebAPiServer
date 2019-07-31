@@ -14,8 +14,9 @@ namespace AutoMapper.Mappings
         public AutoMapperResourceToModel()
         {
             CreateMap<AuthorDTO, Author>();
-            CreateMap<LibraryItemDTO, LibraryItem>().ForMember(src => src.ItemType,
-                            opt => opt.MapFrom(src => (Database.Entities.LibraryItemType)src.ItemType));
+            CreateMap<LibraryItemDTO, LibraryItem>()
+                ;//.ForMember(src => src.ItemType,
+                //            opt => opt.MapFrom(src => (Database.Entities.LibraryItemType)src.ItemType));
             CreateMap<ItemStatusDTO, ItemStatus>();
             CreateMap<StatusDTO, Status>();
         }

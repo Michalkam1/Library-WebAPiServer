@@ -14,6 +14,7 @@ using AutoMapper.Configuration;
 using Library_WebAPiServer.Domain.Services;
 using System.Runtime.Serialization.Json;
 using Newtonsoft.Json;
+using AutoMapper.Mappings;
 
 
 
@@ -40,11 +41,28 @@ namespace Library_WebAPiServer.Controllers
         [HttpGet]
         public async Task<IEnumerable<LibraryItemDTO>> GetAllAsync()
         {
+            //AutoMapperModelToResource config = new AutoMapperModelToResource();
+            
             var items = await _libItemService.ListAsync();
-            var resources = _mapper.Map<IEnumerable<LibraryItem>, IEnumerable<LibraryItemDTO>>(items);
+            //try
+            //{
+                var resources = _mapper.Map<IEnumerable<LibraryItem>, IEnumerable<LibraryItemDTO>>(items);
+                return resources;
+            //}
+            //catch
+            //{
+            //    foreach(var i in items)
+            //    {
+            //        Database.Entities.LibraryItemType itemType = new Database.Entities.LibraryItemType();
+            //        i.ItemType = itemType;
+            //    }
+            //    var resources = _mapper.Map<IEnumerable<LibraryItem>, IEnumerable<LibraryItemDTO>>(items);
+            //    return resources;
+            //}
 
-            return resources;
+            
         }
+        
 
         [HttpPost]
         public async Task<IActionResult> PostItems([FromBody]LibraryItemDTO libItem)
