@@ -56,8 +56,8 @@ namespace ClientWebApp.Controllers
 
             var model = new LibraryViewModel()
             {
-                //Items = items.ToArray()
-                Items = libraryItemsList
+                Items = items.ToArray()
+                //Items = libraryItemsList
             };
 
             return View(model);
