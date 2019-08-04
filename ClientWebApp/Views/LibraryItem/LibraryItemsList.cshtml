@@ -13,7 +13,7 @@
         Tytuł: <input type="text" name="SearchTitle">
         Imię Autora: <input type="text" name="SearchAuthorFirstName">
         Nazwisko Autora: <input type="text" name="SearchAuthorLastName">
-        Nośnik: <input type="text" name="SearchItemType">
+        @*Nośnik: <input type="text" name="SearchItemType">*@
         <input type="submit" value="Filtr" />
     </p>
 </form>
@@ -28,7 +28,7 @@
                 <th>Tytuł</th>
                 <th>Imię i Nazwisko Autora</th>
                 <th>Rok Wydania</th>
-                <th>Nośnik</th>
+                @*<th>Nośnik</th>*@
 
             </tr>
         </thead>
@@ -41,7 +41,7 @@
             <td>@item.Title</td>
             <td>@item.Author.FirstName @item.Author.LastName</td>
             <td>@item.IssueYear.Year</td>
-            <td>@item.ItemType</td>
+            @*<td>@item.ItemType</td>*@
 
 
         </tr>
