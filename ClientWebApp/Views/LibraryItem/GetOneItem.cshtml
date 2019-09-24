@@ -1,28 +1,26 @@
 ﻿@model LibraryItemViewModel;
 
 @{
-    ViewData["Title"] = "Wrowadź dane";
+    ViewData["Title"] = "Wprowadzona pozycja";
 }
 <!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
-    <title>Dodaj element do biblioteki</title>
-
+    <title>Element w bibliotece</title>
 </head>
 <body>
-
     <form asp-action="SaveLibraryItem" method="post">
         <fieldset>
             <legend>Informacje</legend>
             <div class="form-group">
-                <label for="Title">Tytuł:</label>
-                <input type="text" class="form-control" name="Title" placeholder="Tytuł" value="@Model.Title" />
+                <label for="Title">Tytuł:</label><br />
+                <label>@Model.Title</label>
             </div>
 
             <div class="form-group">
-                <label for="Author">Imię autora:</label><br />
-                @Html.DropDownListFor(m => m.Author.Id, new SelectList((IEnumerable<SelectListItem>)ViewBag.AuthorsViewBag, "Value", "Text"))
+                <label for="Author">Imię autora:</label><br /><label>@Model.Author.FirstName</label>
+                @*@Html.DropDownListFor(m => m.Author.Id, new SelectList((IEnumerable<SelectListItem>)ViewBag.AuthorsViewBag, "Value", "Text"))*@
             </div>
 
             <div class="form-group">

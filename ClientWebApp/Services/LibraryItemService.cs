@@ -34,6 +34,17 @@ namespace ClientWebApp.Services
             return returnLibItems.ToArray();
         }
 
+        [HttpGet]
+        public async Task<LibraryItemViewModel> GetOne(int id)
+        {
+            LibraryItemsClient libraryServiceClient = new LibraryItemsClient(httpClient);
+
+            LibraryItemDTO libraryItem = await libraryServiceClient.GetOneAsync(id);
+
+            LibraryItemViewModel returnLibItem = _mapper.Map<LibraryItemDTO, LibraryItemViewModel>(libraryItem);
+
+            return returnLibItem;//.ToArray()
+        }
 
         [HttpPost]
         public async Task<FileResponse> AddLibraryItem(LibraryItemViewModel newItem)

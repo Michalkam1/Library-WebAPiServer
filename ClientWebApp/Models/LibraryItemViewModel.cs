@@ -28,27 +28,25 @@ namespace ClientWebApp.Models
         //    public string Title { get; set; }
         //}
 
-        public enum LibraryItemType : byte
-        {
-            [Description("DVD")]
-            DVD = 1,
-            [Description("CD")]
-            CD = 2,
-            [Description("Book")]
-            Book = 3
-        };
+        //public enum LibraryItemType : byte
+        //{
+        //    [Description("DVD")]
+        //    DVD = 1,
+        //    [Description("CD")]
+        //    CD = 2,
+        //    [Description("Book")]
+        //    Book = 3
+        //};
 
         public class LibraryItemViewModel
         {
             public int Id { get; set; }
             public Author Author { get; set; }
-            //public int Author { get; set; }
-            public LibraryItemType ItemType { get; set; }
+            //public LibraryItemType ItemType { get; set; }
+            public int ItemType { get; set; }
             public string Cover { get; set; }
             public DateTimeOffset IssueYear { get; set; }
             public string Title { get; set; }
-
-
         }
     //}
 }

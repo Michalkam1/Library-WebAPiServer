@@ -52,8 +52,6 @@ namespace ClientWebApp.Controllers
                 items = items.Where(s => s.Author.LastName.ToLower().Contains(searchAuthorLastName.ToLower()));
             }
 
-           
-
             var model = new LibraryViewModel()
             {
                 Items = items.ToArray()
@@ -76,39 +74,42 @@ namespace ClientWebApp.Controllers
             });
 
             ViewBag.AuthorsViewBag = new SelectList(authors, "Value", "Text");
-            
-
             return View(model);
         }
-
-        //[HttpPost]
-        public async Task<IActionResult> SaveLibraryItem(LibraryItemViewModel newItem)
+        private int _Id;
+        public async Task<IActionResult> GetOneItem(int id)
         {
-            
-            //int successfullTran = await _libraryItemService.AddLibraryItem(newItem);
-            var successfullTran = await _libraryItemService.AddLibraryItem(newItem);
-            //if (successfullTran > 0)
+            _Id = id;
+            LibraryItemViewModel libraryItemsList = await _libraryItemService.GetOne(_Id);
+            //var model = new LibraryItemViewModel();
+            //Author[] listaAutorow = await _authorService.GetAuthors();
+
+            //var authors = listaAutorow.Select(a => new SelectListItem
             //{
-            //    return BadRequest("Could not add item.");
-            //}
+            //    Text = a.LastName.ToString() + ' ' + a.FirstName.ToString(),
+            //    Value = a.Id.ToString()
+            //});
 
-            return RedirectToAction("LibraryItemsList");
-
+            //ViewBag.AuthorsViewBag = new SelectList(authors, "Value", "Text");
+            //return View(model);
+            return View(libraryItemsList);
         }
 
-        //public async Task<IActionResult> SaveAuthor(Author newAuthor)
-        //{
 
-        //    //int successfullTran = await _libraryItemService.AddLibraryItem(newItem);
-        //    var successfullTran = await _authorService.AddAuthor(newAuthor);
-        //    //if (successfullTran > 0)
-        //    //{
-        //    //    return BadRequest("Could not add item.");
-        //    //}
 
-        //    return RedirectToAction("EnterData");
-
-        //}
-
+        [HttpPost]
+        public async Task<IActionResult> SaveLibraryItem(LibraryItemViewModel newItem)
+        {
+            ClientWebApp.Client.FileResponse successfullTran;
+            if (ModelState.IsValid)
+            {
+                successfullTran = await _libraryItemService.AddLibraryItem(newItem);
+                return RedirectToAction("LibraryItemsList");
+            }
+            else
+            {
+                return BadRequest("Nie można dodać elementu, wszystkie pola muszą być uzupełnione.");
+            }
+        }
     }
 }

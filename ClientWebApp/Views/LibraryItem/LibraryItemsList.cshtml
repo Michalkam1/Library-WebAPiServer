@@ -13,7 +13,6 @@
         Tytuł: <input type="text" name="SearchTitle">
         Imię Autora: <input type="text" name="SearchAuthorFirstName">
         Nazwisko Autora: <input type="text" name="SearchAuthorLastName">
-        @*Nośnik: <input type="text" name="SearchItemType">*@
         <input type="submit" value="Filtr" />
     </p>
 </form>
@@ -24,26 +23,20 @@
     <table class="table table-bordered table-hover">
         <thead>
             <tr>
-                @*<th>&#x2714;</th>*@
+                <th>&#x2714;</th>
                 <th>Tytuł</th>
                 <th>Imię i Nazwisko Autora</th>
                 <th>Rok Wydania</th>
-                @*<th>Nośnik</th>*@
-
             </tr>
         </thead>
 
         @foreach (var item in Model.Items)
         {
-        <tr>
-            @*<td>&#x25BB;</td>*@
-
+        <tr onclick="location.href = '@(Url.Action("GetOneItem", "LibraryItem", new { id = item.Id}))'">
+            <td>&#x25BB;</td>
             <td>@item.Title</td>
             <td>@item.Author.FirstName @item.Author.LastName</td>
             <td>@item.IssueYear.Year</td>
-            @*<td>@item.ItemType</td>*@
-
-
         </tr>
         }
     </table>

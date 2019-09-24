@@ -27,22 +27,19 @@ namespace Library_WebAPiServer.Domain.Services
             return await _libItemsRepository.ListAsync();
         }
 
+        public async Task<LibraryItem> ListOneAsync(int id)
+        {
+            return await _libItemsRepository.FindByIdAsync(id);
+        }
+
         public async Task<LibraryItem> SaveAsync(LibraryItem libItem)
         {
-            //try
-            //{
                 var existingAuthor = await _authorsRepository.FindByIdAsync(libItem.Author.Id);
 
                 await _libItemsRepository.AddAsync(libItem);
                 await _unitOfWork.CompleteAsync();
 
-                return libItem;
-            //}
-            //catch(Exception ex)
-            //{
-            //    throw new NotImplementedException();
-            //}
-            
+                return libItem;            
         }
     }
 }

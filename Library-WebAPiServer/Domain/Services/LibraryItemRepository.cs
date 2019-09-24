@@ -25,7 +25,8 @@ namespace Library_WebAPiServer.Domain.Services
         {
             return await _context.LibraryItem
                 .Include(a => a.Author)
-                .FirstOrDefaultAsync(a => a.Author.Id == id);
+                .FirstOrDefaultAsync(a => a.Id == id);
+            //.FirstOrDefaultAsync(a => a.Author.Id == id);
         }
 
         public async Task<IEnumerable<LibraryItem>> ListAsync()
