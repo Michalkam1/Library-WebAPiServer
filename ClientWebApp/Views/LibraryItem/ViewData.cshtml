@@ -19,13 +19,15 @@
             </div>
 
             <div class="form-group">
-                <label for="Author">Imię autora:</label><br /><label>@Model.Author.FirstName</label>
-                @Html.DropDownListFor(m => m.Author.Id, new SelectList((IEnumerable<SelectListItem>)ViewBag.AuthorsViewBag, "Value", "Text"))
+                <label for="Author">Autor:</label><br />
+                <label>@Model.Author.FirstName - @Model.Author.LastName</label>
+                @*@Html.DropDownListFor(m => m.Author.Id, new SelectList((IEnumerable<SelectListItem>)ViewBag.AuthorsViewBag, "Value", "Text"))*@
             </div>
 
             <div class="form-group">
-                <label for="IssueYear">Data wydania</label>
-                <input type="date" class="form-control" name="IssueYear" placeholder="Rok" value="@Model.IssueYear" />
+                <label for="IssueYear">Data wydania:</label><br />
+                <label>@Model.IssueYear</label>
+                @*<input type="date" class="form-control" name="IssueYear" placeholder="Rok" value="@Model.IssueYear" />*@
             </div>
 
             @*<div class="form-group">

@@ -55,7 +55,6 @@ namespace ClientWebApp.Controllers
             var model = new LibraryViewModel()
             {
                 Items = items.ToArray()
-                //Items = libraryItemsList
             };
 
             return View(model);
@@ -81,17 +80,7 @@ namespace ClientWebApp.Controllers
         {
             _Id = id;
             LibraryItemViewModel libraryItemsList = await _libraryItemService.GetOne(_Id);
-            //var model = new LibraryItemViewModel();
-            //Author[] listaAutorow = await _authorService.GetAuthors();
 
-            //var authors = listaAutorow.Select(a => new SelectListItem
-            //{
-            //    Text = a.LastName.ToString() + ' ' + a.FirstName.ToString(),
-            //    Value = a.Id.ToString()
-            //});
-
-            //ViewBag.AuthorsViewBag = new SelectList(authors, "Value", "Text");
-            //return View(model);
             return View(libraryItemsList);
         }
 

@@ -19,38 +19,16 @@
             </div>
 
             <div class="form-group">
-                <label for="Author">Imię autora:</label><br /><label>@Model.Author.FirstName</label>
-                @*@Html.DropDownListFor(m => m.Author.Id, new SelectList((IEnumerable<SelectListItem>)ViewBag.AuthorsViewBag, "Value", "Text"))*@
+                <label for="Author">Imię autora:</label><br />
+                <label>@Model.Author.FirstName @Model.Author.LastName</label>
             </div>
 
             <div class="form-group">
-                <label for="IssueYear">Data wydania</label>
-                <input type="date" class="form-control" name="IssueYear" placeholder="Rok" value="@Model.IssueYear" />
+                <label for="IssueYear">Data wydania:</label><br />
+                <label>@Model.IssueYear.Date.ToString("yyyy/MM/dd")</label>
             </div>
-
-            @*<div class="form-group">
-                <label for="ItemType">Nośnik:</label>
-                @Html.DropDownListFor(m => m.ItemType, new SelectList((IEnumerable<SelectListItem>)Html.GetEnumSelectList(typeof(int)), "Value", "Text"))
-            </div>*@
-
-            @*<div class="form-group">
-                    <label for="Cover">Okładka:</label>
-                    <input type="text" class="form-control" name="Cover" placeholder="Okładka" />
-                </div>*@
-
-            <p><input type="submit" class="btn btn-primary" name="buttonSubmit" value="Dodaj Element" /></p>
-
         </fieldset>
     </form>
-    <h2>Wprowadzanie autorów</h2>
-    <ol>
-        <li>
-
-            <a asp-controller="AuthorItem"
-               asp-action="EnterAuthor">Wprowadzanie autorów</a>
-
-        </li>
-    </ol>
 </body>
 </html>
 
